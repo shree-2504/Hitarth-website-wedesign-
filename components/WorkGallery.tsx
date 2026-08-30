@@ -61,6 +61,17 @@ export default function WorkGallery({
   };
   const stopAutoplay = () => swiperRef.current?.autoplay?.stop();
 
+  // Swiper's centered loop mode needs at least slidesPerView + slidesPerGroup + 1
+  // real slides to compute the wrap correctly — a category with only 2-3 projects
+  // (e.g. Institutional) falls short and leaves a blank gap at the loop boundary.
+  // Padding out to a minimum count gives it enough real slides to loop against.
+  const MIN_LOOP_SLIDES = 8;
+  const loopEnabled = projects.length > 1;
+  const slides =
+    loopEnabled && projects.length < MIN_LOOP_SLIDES
+      ? Array.from({ length: MIN_LOOP_SLIDES }, (_, i) => projects[i % projects.length])
+      : projects;
+
   return (
     <div
       ref={rootRef}
@@ -74,7 +85,7 @@ export default function WorkGallery({
         effect="coverflow"
         grabCursor
         centeredSlides
-        loop={projects.length > 2}
+        loop={loopEnabled}
         speed={650}
         keyboard={{ enabled: true }}
         mousewheel={{ forceToAxis: true, sensitivity: 1, releaseOnEdges: true }}
@@ -101,8 +112,8 @@ export default function WorkGallery({
         }}
         className="!px-6 !pb-4"
       >
-        {projects.map((p) => (
-          <SwiperSlide key={p.id} style={{ width: '340px', maxWidth: '78vw' }}>
+        {slides.map((p, i) => (
+          <SwiperSlide key={`${p.id}-${i}`} style={{ width: '340px', maxWidth: '78vw' }}>
             <div className="slide-inner">
               <button
                 type="button"
