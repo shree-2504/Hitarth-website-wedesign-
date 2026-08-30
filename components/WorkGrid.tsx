@@ -1,9 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import type { Project } from '@/data/projects';
+
+gsap.registerPlugin(ScrollTrigger);
 
 function formatCategory(cat: string) {
   return cat.charAt(0).toUpperCase() + cat.slice(1);
@@ -12,12 +16,42 @@ function formatCategory(cat: string) {
 export default function WorkGrid({ projects }: { projects: Project[] }) {
   const categories = ['all', ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))];
   const [activeCategory, setActiveCategory] = useState('all');
+  const rootRef = useRef<HTMLDivElement>(null);
 
   const filtered =
     activeCategory === 'all' ? projects : projects.filter((p) => p.category === activeCategory);
 
+  // The page-wide ScrollReveals singleton only scans for .reveal-clip once,
+  // at initial mount — switching filters swaps in brand-new DOM nodes it
+  // never saw, which stay clipped shut forever. Re-scan scoped to this grid
+  // every time the filtered set changes.
+  useEffect(() => {
+    if (!rootRef.current) return;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const els = gsap.utils.toArray<HTMLElement>('.reveal-clip', rootRef.current);
+
+    if (reduceMotion) {
+      els.forEach((el) => el.classList.add('gsap-in'));
+      return;
+    }
+
+    const triggers = ScrollTrigger.batch(els, {
+      start: 'top 90%',
+      once: true,
+      onEnter: (batch) =>
+        gsap.to(batch, {
+          clipPath: 'inset(0 0 0% 0)',
+          duration: 1.1,
+          ease: 'power4.out',
+          stagger: 0.08,
+        }),
+    });
+
+    return () => triggers.forEach((t) => t.kill());
+  }, [activeCategory]);
+
   return (
-    <div>
+    <div ref={rootRef}>
       {categories.length > 2 && (
         <div className="reveal flex flex-wrap gap-3 mb-10 md:mb-14">
           {categories.map((cat) => (
