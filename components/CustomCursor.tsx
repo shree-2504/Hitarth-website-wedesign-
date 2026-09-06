@@ -85,7 +85,9 @@ export default function CustomCursor() {
 
   return (
     <>
-      <div ref={ringRef} className="cursor-ring" aria-hidden="true" />
+      <div ref={ringRef} className="cursor-ring" aria-hidden="true">
+        <div className="cursor-ring-inner" />
+      </div>
       <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
     </>
   );
