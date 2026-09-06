@@ -1,12 +1,7 @@
 'use client';
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 type Practice = {
   idx: string;
@@ -72,56 +67,18 @@ const PRACTICES: Practice[] = [
 ];
 
 export default function PracticeTabs() {
-  const sectionRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-
-  // useLayoutEffect (not useEffect): ScrollTrigger's `pin` rewraps this
-  // section in its own spacer div outside React's tree. That rewrap has to
-  // be reverted by st.kill() synchronously before React detaches the node
-  // on unmount (e.g. navigating away) — a plain useEffect's cleanup runs
-  // too late, after React's own removeChild, and throws
-  // "NotFoundError: node to be removed is not a child of this node".
-  useLayoutEffect(() => {
-    if (!sectionRef.current) return;
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) return;
-
-    const n = PRACTICES.length;
-    const st = ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top top',
-      end: () => `+=${n * 100}%`,
-      pin: true,
-      scrub: 0.3,
-      onUpdate: (self) => {
-        const idx = Math.min(n - 1, Math.floor(self.progress * n));
-        setActive(idx);
-      },
-    });
-
-    return () => st.kill();
-  }, []);
-
-  const jumpTo = (i: number) => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const trigger = ScrollTrigger.getAll().find((t) => t.trigger === el);
-    if (!trigger) return;
-    const target = trigger.start + (i / PRACTICES.length) * (trigger.end - trigger.start) + 4;
-    gsap.to(window, { duration: 1, scrollTo: { y: target }, ease: 'power2.inOut' });
-  };
-
   const current = PRACTICES[active];
 
   return (
-    <section id="practice" ref={sectionRef} className="relative h-screen overflow-hidden bg-paper/92">
-      <div className="max-w-[1240px] mx-auto px-6 md:px-10 h-full flex flex-col justify-center">
+    <section id="practice" className="relative bg-paper/92 py-20 md:py-28">
+      <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         <div className="flex items-end justify-between gap-10 mb-10 md:mb-16">
           <h2 className="font-display font-medium text-[clamp(28px,3.4vw,46px)] max-w-[14ch]">
             What we practice
           </h2>
           <p className="hidden md:block max-w-[34ch] text-muted text-[15px] leading-relaxed">
-            Three disciplines, one continuous process — scroll to move through each.
+            Three disciplines, one continuous process — click through each.
           </p>
         </div>
 
@@ -131,7 +88,7 @@ export default function PracticeTabs() {
             {PRACTICES.map((p, i) => (
               <button
                 key={p.idx}
-                onClick={() => jumpTo(i)}
+                onClick={() => setActive(i)}
                 className={`text-left font-mono text-xs tracking-widest uppercase py-3 px-4 border transition-colors ${
                   active === i ? 'border-ink bg-ink text-paper' : 'border-line text-muted hover:border-ink'
                 }`}
