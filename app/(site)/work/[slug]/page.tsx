@@ -54,6 +54,15 @@ export default async function ProjectPage({ params }: { params: { slug: string }
   const index = allProjects.findIndex((p) => p.slug === project.slug);
   const next = index >= 0 ? allProjects[(index + 1) % allProjects.length] : null;
 
+  // Only the facts actually filled in for this project make it onto the page.
+  const facts = [
+    { label: 'Year', value: project.year },
+    { label: 'Client', value: project.client },
+    { label: 'Area', value: project.area },
+    { label: 'Status', value: project.status },
+    { label: 'Scope', value: project.scope },
+  ].filter((f): f is { label: string; value: string } => Boolean(f.value));
+
   return (
     <>
       <div className="relative h-[70vh] min-h-[420px] mt-[76px]">
@@ -91,6 +100,19 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             <p className="mt-8 text-lg leading-relaxed text-[#3B3934] max-w-[68ch]">
               {project.description}
             </p>
+          )}
+
+          {facts.length > 0 && (
+            <dl className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-7 border-t border-line pt-8">
+              {facts.map(({ label, value }) => (
+                <div key={label}>
+                  <dt className="font-mono text-[11px] tracking-widest uppercase text-muted">
+                    {label}
+                  </dt>
+                  <dd className="mt-2 font-display text-lg leading-snug">{value}</dd>
+                </div>
+              ))}
+            </dl>
           )}
 
           <ProjectGallery images={project.images ?? []} title={project.title} />

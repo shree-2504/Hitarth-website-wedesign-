@@ -9,6 +9,14 @@ export type Project = {
   // Does not include imageUrl itself.
   images?: string[];
   description?: string;
+  // Optional spec-sheet facts, rendered as a panel on the detail page. Every
+  // one is optional and the panel hides entirely when none are set, so a
+  // project with nothing filled in looks exactly as it did before.
+  year?: string;
+  client?: string;
+  area?: string;
+  status?: string;
+  scope?: string;
 };
 
 export const fallbackProjects: Project[] = [
