@@ -1,5 +1,6 @@
 import MagneticLink from './MagneticLink';
 import EmailStudioModal from './EmailStudioModal';
+import { SITE, MAPS_URL } from '@/lib/site';
 
 export default function Contact() {
   return (
@@ -22,19 +23,19 @@ export default function Contact() {
         <div className="reveal mt-11 flex gap-6 justify-center flex-wrap">
           <EmailStudioModal />
           <MagneticLink
-            href="tel:+919324270864"
-            className="border border-[#3A2E22] hover:border-paper transition-colors px-7 py-4 font-mono text-[13px] tracking-wide uppercase"
+            href={`tel:${SITE.phoneHref}`}
+            className="border border-[#7A6E5C] hover:border-paper transition-colors px-7 py-4 font-mono text-[13px] tracking-wide uppercase"
           >
-            Call +91 93242 70864
+            Call {SITE.phone}
           </MagneticLink>
         </div>
         <a
-          href="https://www.google.com/maps/search/?api=1&query=19.2295,72.8480"
+          href={MAPS_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="reveal mt-9 inline-block font-mono text-[13px] tracking-wide uppercase text-[#C9C6BB] border-b border-transparent hover:border-paper hover:text-paper transition-colors"
         >
-          Borivali (W), Mumbai, Maharashtra ↗
+          {SITE.address.full} ↗
         </a>
       </div>
     </section>

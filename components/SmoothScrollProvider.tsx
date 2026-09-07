@@ -18,23 +18,31 @@ export default function SmoothScrollProvider({ children }: { children: React.Rea
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) return; // respect user preference: no smooth-scroll hijacking
 
+    // 1.1s of easing made every flick of the wheel coast for noticeably longer
+    // than the gesture; 0.8 keeps the smoothing without the page feeling like
+    // it's lagging behind the input.
     const lenis = new Lenis({
-      duration: 1.1,
+      duration: 0.8,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
 
-    // expose for other components (e.g. the skyline scene) without prop-drilling
+    // expose for other components (e.g. the header's menu scroll-lock) without
+    // prop-drilling
     (window as any).__lenis = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    // Named so the cleanup can actually detach it — an anonymous callback left
+    // on the ticker keeps calling raf() on a destroyed Lenis after unmount.
+    const tick = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
+    gsap.ticker.add(tick);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(tick);
       lenis.destroy();
       (window as any).__lenis = null;
     };

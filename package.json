@@ -21,14 +21,12 @@
     "sanity": "3.55.0",
     "sharp": "^0.35.3",
     "styled-components": "6.1.12",
-    "swiper": "12.2.0",
-    "three": "^0.166.1"
+    "swiper": "12.2.0"
   },
   "devDependencies": {
     "@types/node": "20.14.15",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
-    "@types/three": "^0.166.0",
     "autoprefixer": "10.4.19",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.35",

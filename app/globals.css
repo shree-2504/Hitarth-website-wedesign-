@@ -117,42 +117,6 @@ html.lenis, html.lenis body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Photo backdrop: real project photography, slow Ken Burns crossfade,
-   fixed behind all page content. Each image shares one keyframe timeline
-   and is phase-shifted via a negative animation-delay so they hand off to
-   one another instead of all animating in lockstep. */
-.photo-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: -10;
-  overflow: hidden;
-  background: #E7D4BB;
-}
-.photo-backdrop-img {
-  object-fit: cover;
-  opacity: 0;
-  filter: grayscale(55%) sepia(10%) saturate(0.9) brightness(1.02);
-  animation: photo-cycle 40s ease-in-out infinite;
-}
-.photo-backdrop-tint {
-  position: fixed;
-  inset: 0;
-  z-index: -9;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(231, 212, 187, 0.82), rgba(202, 184, 160, 0.86));
-}
-@keyframes photo-cycle {
-  0% { opacity: 0; transform: scale(1) translate3d(0, 0, 0); }
-  2% { opacity: 1; }
-  18% { opacity: 1; }
-  20% { opacity: 0; transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
-  100% { opacity: 0; transform: scale(1) translate3d(0, 0, 0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .photo-backdrop-img { animation: none; opacity: 0; }
-  .photo-backdrop-img:first-child { opacity: 1; }
-}
-
 /* Topographic contour-line backdrop */
 .contour-backdrop {
   position: fixed;

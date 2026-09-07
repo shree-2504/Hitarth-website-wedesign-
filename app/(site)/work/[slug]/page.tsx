@@ -19,9 +19,27 @@ export async function generateMetadata({
   const project = await getProjectBySlug(params.slug);
   if (!project) return {};
 
+  const description = project.description || `${project.title}, ${project.location}.`;
+
   return {
-    title: `${project.title} — We Design Architects`,
-    description: project.description || `${project.title}, ${project.location}.`,
+    title: project.title,
+    description,
+    alternates: { canonical: `/work/${project.slug}` },
+    // The project's own photograph makes a far better share card than the
+    // site-wide default, and it's already on hand.
+    openGraph: {
+      type: 'article',
+      title: project.title,
+      description,
+      url: `/work/${project.slug}`,
+      images: [{ url: project.imageUrl, alt: project.title }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: project.title,
+      description,
+      images: [project.imageUrl],
+    },
   };
 }
 

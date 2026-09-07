@@ -4,9 +4,10 @@ import InteriorGallery from '@/components/InteriorGallery';
 import { interiorProjects } from '@/data/interiors';
 
 export const metadata: Metadata = {
-  title: 'Interiors — We Design Architects',
+  title: 'Interiors',
   description:
     'Bespoke architectural and interior spaces that blend luxury, functionality and clean modern aesthetics — from signature residential homes to high-end executive spaces.',
+  alternates: { canonical: '/interiors' },
 };
 
 const FEATURES = [

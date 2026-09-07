@@ -4,9 +4,20 @@ import { useState } from 'react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
+// #3A2E22 sat at 1.44:1 against the ink section — the underlines were all but
+// invisible until focused. #7A6E5C clears the 3:1 bar for UI boundaries.
 const fieldClass =
-  'w-full bg-transparent border-b border-[#3A2E22] focus:border-paper outline-none py-2.5 text-paper placeholder:text-[#6B5F4E] transition-colors';
+  'w-full bg-transparent border-b border-[#7A6E5C] focus:border-paper outline-none py-2.5 text-paper placeholder:text-[#9A8E7C] transition-colors';
 const labelClass = 'block font-mono text-[11px] tracking-widest uppercase text-[#C9C6BB] mb-2';
+
+const PROJECT_TYPES = [
+  'Residential',
+  'Commercial',
+  'Industrial',
+  'Interiors',
+  'CRZ approvals',
+  'Other / not sure yet',
+];
 
 export default function QueryForm() {
   const [status, setStatus] = useState<Status>('idle');
@@ -21,6 +32,8 @@ export default function QueryForm() {
     const data = {
       name: (form.elements.namedItem('name') as HTMLInputElement).value,
       email: (form.elements.namedItem('email') as HTMLInputElement).value,
+      phone: (form.elements.namedItem('phone') as HTMLInputElement).value,
+      projectType: (form.elements.namedItem('projectType') as HTMLSelectElement).value,
       comments: (form.elements.namedItem('comments') as HTMLTextAreaElement).value,
       company: (form.elements.namedItem('company') as HTMLInputElement).value,
     };
@@ -64,24 +77,88 @@ export default function QueryForm() {
         <label htmlFor="name" className={labelClass}>
           Name
         </label>
-        <input id="name" name="name" type="text" required className={fieldClass} />
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          autoComplete="name"
+          className={fieldClass}
+        />
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="email" className={labelClass}>
+            Email
+          </label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            inputMode="email"
+            className={fieldClass}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone" className={labelClass}>
+            Phone
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            autoComplete="tel"
+            inputMode="tel"
+            className={fieldClass}
+          />
+        </div>
       </div>
 
       <div>
-        <label htmlFor="email" className={labelClass}>
-          Email
+        <label htmlFor="projectType" className={labelClass}>
+          Project type
         </label>
-        <input id="email" name="email" type="email" required className={fieldClass} />
+        <select
+          id="projectType"
+          name="projectType"
+          required
+          defaultValue=""
+          className={`${fieldClass} [&>option]:bg-ink [&>option]:text-paper`}
+        >
+          <option value="" disabled>
+            Select one…
+          </option>
+          {PROJECT_TYPES.map((t) => (
+            <option key={t} value={t}>
+              {t}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>
         <label htmlFor="comments" className={labelClass}>
-          Comments
+          About the site / project
         </label>
-        <textarea id="comments" name="comments" required rows={4} className={`${fieldClass} resize-none`} />
+        <textarea
+          id="comments"
+          name="comments"
+          required
+          rows={4}
+          className={`${fieldClass} resize-none`}
+        />
       </div>
 
-      {status === 'error' && <p className="font-mono text-xs text-accent-light">{errorMsg}</p>}
+      {status === 'error' && (
+        <p role="alert" className="font-mono text-xs text-accent-light">
+          {errorMsg}
+        </p>
+      )}
 
       <button
         type="submit"

@@ -4,9 +4,10 @@ import Contact from '@/components/Contact';
 import { getProjects } from '@/lib/sanity/queries';
 
 export const metadata: Metadata = {
-  title: 'Work — We Design Architects',
+  title: 'Work',
   description:
     'Residential, commercial, industrial and institutional projects by We Design Architects — planning, design and CRZ approvals across Mumbai.',
+  alternates: { canonical: '/work' },
 };
 
 export default async function WorkPage() {
