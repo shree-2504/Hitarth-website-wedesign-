@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Practice = {
   idx: string;
@@ -10,6 +11,8 @@ type Practice = {
   body: string;
   href?: string;
   icon: React.ReactElement;
+  /** Work of this discipline, shown beside the copy. */
+  image: { src: string; alt: string };
 };
 
 const PRACTICES: Practice[] = [
@@ -24,6 +27,10 @@ const PRACTICES: Practice[] = [
         <path d="M6 20h36M20 6v36M6 32h14" />
       </svg>
     ),
+    image: {
+      src: '/images/night-aerial.jpg',
+      alt: 'Aerial view of the Seasons multi-tower residential masterplan',
+    },
   },
   {
     idx: '02',
@@ -36,6 +43,10 @@ const PRACTICES: Practice[] = [
         <path d="M8 40h32M20 40V24h8v16" />
       </svg>
     ),
+    image: {
+      src: '/images/residential-tower-1.jpg',
+      alt: 'Gulmohar Homes residential tower, street elevation',
+    },
   },
   {
     idx: '03',
@@ -49,6 +60,10 @@ const PRACTICES: Practice[] = [
         <circle cx="24" cy="14" r="4" />
       </svg>
     ),
+    image: {
+      src: '/images/coastal-towers.jpg',
+      alt: 'Coastal residential development of the kind that requires CRZ clearance',
+    },
   },
   {
     idx: '04',
@@ -63,6 +78,10 @@ const PRACTICES: Practice[] = [
         <circle cx="30" cy="17" r="3" />
       </svg>
     ),
+    image: {
+      src: '/images/interior/3bhk-living-room-1.jpg',
+      alt: 'Living room of a 3BHK apartment fitted out by the studio',
+    },
   },
 ];
 
@@ -78,11 +97,15 @@ export default function PracticeTabs() {
             What we practice
           </h2>
           <p className="hidden md:block max-w-[34ch] text-muted text-[15px] leading-relaxed">
-            Three disciplines, one continuous process — click through each.
+            Four disciplines, one continuous process — click through each.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-[220px_1fr] gap-10 md:gap-16 items-center">
+        {/* Three columns: the tab list, the copy, and the work itself. The
+            section used to run tabs + copy only, which left the right half and
+            the lower third of the band empty on the section that explains what
+            the studio actually does. */}
+        <div className="grid md:grid-cols-[200px_minmax(0,1fr)_minmax(0,0.9fr)] gap-10 md:gap-14 items-center">
           {/* tab list */}
           <div className="flex md:flex-col gap-3 md:gap-2">
             {PRACTICES.map((p, i) => (
@@ -111,6 +134,20 @@ export default function PracticeTabs() {
                 Learn more →
               </Link>
             )}
+          </div>
+
+          {/* keyed on `active` so the image cross-fades with the copy */}
+          <div
+            key={`img-${active}`}
+            className="relative aspect-[4/5] bg-[#1c1c1a] overflow-hidden animate-[fadein_0.5s_ease]"
+          >
+            <Image
+              src={current.image.src}
+              alt={current.image.alt}
+              fill
+              sizes="(min-width: 768px) 32vw, 100vw"
+              className="object-cover"
+            />
           </div>
         </div>
 
