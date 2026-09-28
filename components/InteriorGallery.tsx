@@ -51,6 +51,7 @@ export default function InteriorGallery({ projects }: { projects: InteriorProjec
                   type="button"
                   onClick={() => setActive({ project, index: i })}
                   aria-label={`View ${img.alt} larger`}
+                  data-cursor-label="Enlarge"
                   className="reveal-clip group relative block w-full aspect-[4/5] bg-[#1c1c1a] overflow-hidden text-left"
                 >
                   <Image

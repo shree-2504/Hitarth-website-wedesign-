@@ -71,6 +71,94 @@ html.lenis, html.lenis body {
   .reveal-clip { clip-path: inset(0 0 0% 0); }
 }
 
+/* Minimal dot cursor.
+   Under mix-blend-mode: difference the painted colour is subtracted from the
+   backdrop, so one value covers both themes. #D7C2AA is chosen as
+   paper(#E7D4BB) − ink(#101211): over the paper sections the dot resolves to
+   exactly the site's ink, and over the dark hero it inverts to a warm light
+   tone. Plain white would work too, but differences to a cold navy on paper. */
+.site-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 999;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+.site-cursor.is-out {
+  opacity: 0;
+}
+.site-cursor-dot,
+.site-cursor-ring,
+.site-cursor-label {
+  position: absolute;
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.24s ease;
+}
+.site-cursor-dot {
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border-radius: 50%;
+  background: #D7C2AA;
+}
+.site-cursor-ring {
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 50%;
+  border: 1px solid #D7C2AA;
+  opacity: 0.75;
+}
+/* Sits clear of the ring's 15px radius so the two never overlap. */
+.site-cursor-label {
+  left: 23px;
+  top: -7px;
+  font-family: var(--font-plexmono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #D7C2AA;
+  opacity: 0;
+  transform: translateX(-6px);
+}
+
+/* Over anything interactive the dot tightens and the ring opens. */
+.site-cursor.is-over .site-cursor-dot {
+  transform: scale(0.55);
+}
+.site-cursor.is-over .site-cursor-ring {
+  transform: scale(1.3);
+  opacity: 1;
+}
+/* The label only appears where an element opted in via data-cursor-label. */
+.site-cursor.has-label .site-cursor-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+.site-cursor.is-down .site-cursor-ring {
+  transform: scale(0.82);
+}
+@media (pointer: coarse) {
+  .site-cursor { display: none; }
+}
+
+/* Only hide the system cursor once the cursor is actually running — the
+   component bails out on touch and reduced-motion, and must not leave those
+   visitors with no pointer at all. */
+.site-cursor-active,
+.site-cursor-active a,
+.site-cursor-active button,
+.site-cursor-active select,
+.site-cursor-active input,
+.site-cursor-active textarea,
+.site-cursor-active [role="button"] {
+  cursor: none;
+}
+
 /* subtle film-grain / paper-texture overlay across the whole viewport */
 .grain-overlay {
   position: fixed;
@@ -166,17 +254,28 @@ html.lenis, html.lenis body {
    effect writes its own transform straight onto .swiper-slide every frame
    and would otherwise fight a CSS transform on the same element. */
 .slide-inner {
-  transform: scale(0.92);
-  opacity: 0.55;
-  filter: saturate(0.85);
+  transform: scale(0.94);
+  opacity: 0.72;
+  filter: saturate(0.94);
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.65s ease, filter 0.65s ease;
 }
 .swiper-slide-active .slide-inner {
-  transform: scale(1.07);
+  transform: scale(1.04);
   opacity: 1;
   filter: saturate(1);
 }
+
+/* Only the centred slide is captioned — see WorkGallery. Kept in flow at zero
+   opacity so hiding it never reflows the row. */
+.slide-caption {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+.swiper-slide-active .slide-caption {
+  opacity: 1;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .slide-inner { transition: none; }
+  .slide-inner, .slide-caption { transition: none; }
 }
 

@@ -65,11 +65,25 @@ export default function WorkGallery({
   // real slides to compute the wrap correctly — a category with only 2-3 projects
   // (e.g. Institutional) falls short and leaves a blank gap at the loop boundary.
   // Padding out to a minimum count gives it enough real slides to loop against.
+  //
+  // Round that padding up to a whole multiple of the project count. Padding to a
+  // flat 8 meant 7 projects became [p0…p6, p0] — the first project repeated
+  // right next to itself across the loop seam, so two copies of the same tower
+  // sat in one viewport and the portfolio read as thinner than it is. A whole
+  // multiple repeats every project the same number of times and spaces the
+  // copies a full cycle apart, which pushes them off past the visible row.
+  //
+  // Dropping the loop entirely for short categories was tried and is worse:
+  // centeredSlides then parks slide 0 in the middle and leaves the whole left
+  // half of the row empty.
   const MIN_LOOP_SLIDES = 8;
   const loopEnabled = projects.length > 1;
   const slides =
     loopEnabled && projects.length < MIN_LOOP_SLIDES
-      ? Array.from({ length: MIN_LOOP_SLIDES }, (_, i) => projects[i % projects.length])
+      ? Array.from(
+          { length: Math.ceil(MIN_LOOP_SLIDES / projects.length) * projects.length },
+          (_, i) => projects[i % projects.length]
+        )
       : projects;
 
   return (
@@ -98,15 +112,18 @@ export default function WorkGallery({
             nav.nextEl = nextRef.current;
           }
         }}
-        autoplay={{ delay: 1600, disableOnInteraction: false }}
+        autoplay={{ delay: 4500, disableOnInteraction: false }}
         onSwiper={(s) => {
           swiperRef.current = s;
           s.autoplay.stop();
         }}
+        // Gentle tilt only. At rotate 20 / depth 260 the side slides were bent
+        // far enough that the renders stopped being readable — and the renders
+        // are the product here.
         coverflowEffect={{
-          rotate: 20,
+          rotate: 8,
           stretch: 0,
-          depth: 260,
+          depth: 120,
           modifier: 1,
           slideShadows: false,
         }}
@@ -119,6 +136,7 @@ export default function WorkGallery({
                 type="button"
                 onClick={() => onSelect(p)}
                 aria-label={`View details for ${p.title}`}
+                data-cursor-label="View"
                 className="reveal-clip group relative block w-full aspect-[4/5] bg-[#1c1c1a] overflow-hidden text-left"
               >
                 <Image
@@ -135,7 +153,10 @@ export default function WorkGallery({
                   </span>
                 </div>
               </button>
-              <div className="flex justify-between items-baseline mt-4 gap-4">
+              {/* Captions ride the slide's 3D transform, so on the tilted side
+                  slides they landed at different heights and overlapped their
+                  neighbours. Only the centred slide shows one. */}
+              <div className="slide-caption flex justify-between items-baseline mt-4 gap-4">
                 <h4 className="font-display font-medium text-[17px]">{p.title}</h4>
                 <span className="font-mono text-[11px] text-muted uppercase tracking-wide whitespace-nowrap">
                   {p.location}

@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import ScrollReveals from '@/components/ScrollReveals';
 import ContourBackdrop from '@/components/ContourBackdrop';
 import GrainOverlay from '@/components/GrainOverlay';
+import SiteCursor from '@/components/SiteCursor';
 import { localBusinessJsonLd } from '@/lib/site';
 
 // Shared chrome for every public-facing page (home, /work, /work/[slug], ...).
@@ -25,6 +26,7 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
       </a>
       <ContourBackdrop />
       <ScrollReveals />
+      <SiteCursor />
       <GrainOverlay />
       <Header />
       <main id="main">{children}</main>

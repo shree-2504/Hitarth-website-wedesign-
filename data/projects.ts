@@ -83,7 +83,6 @@ export const fallbackProjects: Project[] = [
       '/images/work/animal-hospital-2.jpg',
       '/images/work/animal-hospital-3.jpg',
       '/images/work/animal-hospital-4.jpg',
-      '/images/hospital-context.jpg',
     ],
     description:
       'An institutional animal hospital designed around clear circulation between public, clinical and service areas, with a street presence suited to daily public access.',
