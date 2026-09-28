@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,8 +13,17 @@ gsap.registerPlugin(ScrollTrigger);
  * ScrollTrigger.batch so elements that enter together — e.g. a heading and
  * its supporting paragraph — cascade in with a stagger instead of all
  * popping in at once.
+ *
+ * Re-scans on every route change. This component lives in the persistent site
+ * layout, so a client-side navigation swaps the page's DOM without remounting
+ * it — and the incoming page's `.reveal` elements would never get registered,
+ * leaving them stranded at the opacity:0 the CSS starts them at. A project
+ * page reached by clicking showed an empty gap where its gallery should be,
+ * while the same URL loaded directly was fine.
  */
 export default function ScrollReveals() {
+  const pathname = usePathname();
+
   useEffect(() => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const els = gsap.utils.toArray<HTMLElement>('.reveal');
@@ -81,7 +91,7 @@ export default function ScrollReveals() {
       window.removeEventListener('load', refresh);
       window.clearTimeout(debounce);
     };
-  }, []);
+  }, [pathname]);
 
   return null;
 }
