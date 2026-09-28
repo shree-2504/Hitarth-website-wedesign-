@@ -4,13 +4,22 @@
  * Metadata, JSON-LD, the footer and the contact section all read from here so
  * a changed phone number or address only has to be edited once.
  *
- * NEXT_PUBLIC_SITE_URL must be set to the live domain in production — it's
- * what `metadataBase` resolves OG/canonical URLs against, and what the sitemap
- * emits. The fallback only keeps local builds working.
+ * Resolution order for the site's own origin, which `metadataBase` uses for
+ * OG/canonical URLs and the sitemap emits verbatim:
+ *
+ *   1. NEXT_PUBLIC_SITE_URL — set this to the live domain in production.
+ *   2. VERCEL_URL — set automatically on every Vercel deployment, so preview
+ *      builds get their own correct absolute URLs with nothing to configure.
+ *      It arrives without a scheme, hence the https:// prefix.
+ *   3. localhost, so local builds work.
+ *
+ * Getting this wrong is quiet rather than loud: the site renders fine while
+ * every share card, canonical tag and sitemap entry points somewhere useless.
  */
-export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-).replace(/\/$/, '');
+const FROM_ENV = process.env.NEXT_PUBLIC_SITE_URL;
+const FROM_VERCEL = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined;
+
+export const SITE_URL = (FROM_ENV || FROM_VERCEL || 'http://localhost:3000').replace(/\/$/, '');
 
 export const SITE = {
   name: 'We Design Architects',
