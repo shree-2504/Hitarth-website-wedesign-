@@ -157,7 +157,9 @@ export default function WorkGallery({
                   slides they landed at different heights and overlapped their
                   neighbours. Only the centred slide shows one. */}
               <div className="slide-caption flex justify-between items-baseline mt-4 gap-4">
-                <h4 className="font-display font-medium text-[17px]">{p.title}</h4>
+                {/* h3, not h4: this sits under the section's h2 ("Selected
+                    work"), so an h4 skips a level in the outline. */}
+                <h3 className="font-display font-medium text-[17px]">{p.title}</h3>
                 <span className="font-mono text-[11px] text-muted uppercase tracking-wide whitespace-nowrap">
                   {p.location}
                 </span>

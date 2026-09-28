@@ -90,7 +90,9 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
               </div>
             </div>
             <div className="flex justify-between items-baseline mt-4 gap-4">
-              <h3 className="font-display font-medium text-[17px]">{p.title}</h3>
+              {/* h2, not h3: the page's only other heading is its h1, so an h3
+                  here skips a level and breaks heading-based navigation. */}
+              <h2 className="font-display font-medium text-[17px]">{p.title}</h2>
               <span className="font-mono text-[11px] text-muted uppercase tracking-wide whitespace-nowrap">
                 {p.location}
               </span>

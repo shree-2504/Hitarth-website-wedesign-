@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Contact from '@/components/Contact';
 import InteriorGallery from '@/components/InteriorGallery';
 import { interiorProjects } from '@/data/interiors';
@@ -6,22 +7,24 @@ import { interiorProjects } from '@/data/interiors';
 export const metadata: Metadata = {
   title: 'Interiors',
   description:
-    'Bespoke architectural and interior spaces that blend luxury, functionality and clean modern aesthetics — from signature residential homes to high-end executive spaces.',
+    'Bespoke, turnkey interiors for high-end residential and executive spaces — from the first material board to the final fitting, by the studio that draws the building.',
   alternates: { canonical: '/interiors' },
 };
 
+// Written to match the practice section rather than sell: each one names what
+// the studio actually hands over, not an adjective.
 const FEATURES = [
   {
-    title: 'Tailored Aesthetics',
-    body: 'Custom material curation, premium finishes, and meticulous detail.',
+    title: 'Spatial planning',
+    body: 'Circulation, storage and services resolved before a single finish is chosen.',
   },
   {
-    title: 'Turnkey Execution',
-    body: 'Seamless flow from 3D visual concepts to flawless final installation.',
+    title: 'Material curation',
+    body: 'Finishes, fittings and surfaces specified and sourced here — not left to the contractor.',
   },
   {
-    title: 'Architectural Precision',
-    body: 'Smart spatial planning designed for modern living and working.',
+    title: 'Turnkey execution',
+    body: 'Visualised in 3D, then carried to handover by the same team that drew it.',
   },
 ];
 
@@ -30,38 +33,44 @@ export default function InteriorsPage() {
     <>
       <section className="bg-paper/90 pt-[140px] md:pt-[168px] pb-24 md:pb-[120px]">
         <div className="max-w-[1240px] mx-auto px-6 md:px-10">
-          <div className="eyebrow reveal mb-5">Interiors</div>
+          {/* Text and image side by side: the page previously opened on ~700px
+              of copy before showing a single room, on a page selling rooms. */}
+          <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-10 md:gap-16 items-center">
+            <div>
+              <div className="eyebrow reveal mb-5">Interiors</div>
 
-          <h1
-            className="reveal font-display font-medium text-[clamp(30px,4.4vw,52px)] max-w-[20ch] leading-tight"
-            style={{ color: '#E31E24' }}
-          >
-            Transform Your Space into a Masterpiece
-          </h1>
+              <h1 className="reveal font-display font-medium text-[clamp(30px,4.4vw,52px)] max-w-[18ch] leading-[1.08]">
+                The drawing <em className="not-italic md:italic text-accent">doesn&apos;t stop</em>{' '}
+                at the wall.
+              </h1>
 
-          <p className="reveal font-display font-semibold text-lg md:text-xl mt-6 max-w-[42ch]">
-            Elevated Interiors. Timeless Sophistication.
-          </p>
+              <p className="reveal mt-6 max-w-[54ch] text-[15px] md:text-base leading-relaxed text-[#3B3934]">
+                The same studio that draws the building details the rooms inside it — bespoke,
+                turnkey interiors for high-end residential and executive spaces, from the first
+                material board to the final fitting.
+              </p>
+            </div>
 
-          <p className="reveal mt-6 max-w-[62ch] text-[15px] md:text-base leading-relaxed text-[#3B3934]">
-            At <span style={{ color: '#E31E24' }}>W</span>e{' '}
-            <span style={{ color: '#E31E24' }}>D</span>esign Architects, we craft bespoke
-            architectural and interior spaces that blend luxury, functionality, and clean modern
-            aesthetics. From signature residential homes to high-end executive spaces, we turn
-            visionary concepts into refined visual realities.
-          </p>
+            <div className="reveal-clip relative aspect-[4/5] md:aspect-[4/5] bg-[#1c1c1a] overflow-hidden">
+              <Image
+                src="/images/interior/entrance-lobby-1.jpg"
+                alt="Entrance lobby with reception desk, designed and fitted out by We Design Architects"
+                fill
+                priority
+                sizes="(min-width: 768px) 46vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
 
-          <h2
-            className="reveal font-display font-medium text-2xl md:text-[28px] mt-16 md:mt-20 mb-8 md:mb-10"
-            style={{ color: '#E31E24' }}
-          >
-            Why Choose Us?
+          <h2 className="reveal font-display font-medium text-2xl md:text-[28px] mt-20 md:mt-28 mb-8 md:mb-10">
+            What that covers
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-10">
             {FEATURES.map((f) => (
               <div key={f.title} className="reveal border-t border-line pt-6">
-                <h3 className="font-display font-semibold text-lg mb-2">{f.title}</h3>
+                <h3 className="font-display font-medium text-lg mb-2">{f.title}</h3>
                 <p className="text-muted text-[15px] leading-relaxed">{f.body}</p>
               </div>
             ))}
