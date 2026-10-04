@@ -94,21 +94,32 @@ export default function Header() {
           </span>
         </a>
 
-        <nav className="hidden md:flex gap-10">
-          {LINKS.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="text-[13px] tracking-wide uppercase font-mono relative pb-1 group"
-            >
-              {l.label}
-              <span
-                className={`absolute left-0 bottom-0 w-0 h-px transition-all duration-300 group-hover:w-full ${
-                  overHero ? 'bg-[#F4EDE0]' : 'bg-accent'
+        {/* Boxed nav. The resting border is faint so the row still reads as
+            navigation rather than five buttons competing with the CTA; hover
+            and the current page fill it outright, which is the same language
+            the practice tabs and work filters already use. */}
+        <nav className="hidden md:flex gap-1.5 lg:gap-2">
+          {LINKS.map((l) => {
+            const current = l.href === pathname;
+            return (
+              <a
+                key={l.href}
+                href={l.href}
+                aria-current={current ? 'page' : undefined}
+                className={`text-[12px] tracking-wide uppercase font-mono px-3.5 lg:px-4 py-2 border transition-colors duration-300 ${
+                  overHero
+                    ? current
+                      ? 'bg-[#F4EDE0] text-ink border-[#F4EDE0]'
+                      : 'border-[#F4EDE0]/30 hover:border-[#F4EDE0] hover:bg-[#F4EDE0] hover:text-ink'
+                    : current
+                      ? 'bg-ink text-paper border-ink'
+                      : 'border-ink/25 hover:border-ink hover:bg-ink hover:text-paper'
                 }`}
-              />
-            </a>
-          ))}
+              >
+                {l.label}
+              </a>
+            );
+          })}
         </nav>
 
         <MagneticLink
