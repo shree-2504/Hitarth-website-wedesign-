@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import MagneticLink from './MagneticLink';
 
-// Practice and Work are reachable without their own header entries — the
-// practice section sits in the homepage scroll, and /work is linked from the
-// Portfolio tab, the "View all work" link and the footer, which still carries
-// the full set.
+// Pared back to the three destinations worth a permanent slot. Studio and
+// Practice are sections in the homepage scroll and both remain in the footer,
+// which still carries the full set.
 const LINKS = [
-  { href: '/#studio', label: 'Studio' },
+  { href: '/work', label: 'Projects' },
   { href: '/interiors', label: 'Interiors' },
   { href: '/#contact', label: 'Contact' },
 ];
