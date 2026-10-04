@@ -18,29 +18,14 @@ type Practice = {
 const PRACTICES: Practice[] = [
   {
     idx: '01',
-    label: 'Planning',
-    title: 'Site & master planning',
-    body: 'Layout strategy for residential, commercial and industrial land — density, access and phasing worked out before a single elevation is drawn.',
+    label: 'Portfolio',
+    title: 'Planning & design, built',
+    body: 'Site strategy and architecture across residential, commercial and industrial land — density, access and phasing resolved before a single elevation is drawn, then carried through to something that gets built rather than rendered.',
+    href: '/work',
     icon: (
       <svg viewBox="0 0 48 48" className="w-14 h-14 stroke-ink fill-none" strokeWidth={1.1}>
         <rect x="6" y="6" width="36" height="36" />
         <path d="M6 20h36M20 6v36M6 32h14" />
-      </svg>
-    ),
-    image: {
-      src: '/images/night-aerial.jpg',
-      alt: 'Aerial view of the Seasons multi-tower residential masterplan',
-    },
-  },
-  {
-    idx: '02',
-    label: 'Design',
-    title: 'Architectural design',
-    body: 'From high-end residential towers to large-format commercial and industrial buildings, designed to be built, not just rendered.',
-    icon: (
-      <svg viewBox="0 0 48 48" className="w-14 h-14 stroke-ink fill-none" strokeWidth={1.1}>
-        <path d="M8 40V16l16-10 16 10v24" />
-        <path d="M8 40h32M20 40V24h8v16" />
       </svg>
     ),
     image: {
@@ -49,7 +34,7 @@ const PRACTICES: Practice[] = [
     },
   },
   {
-    idx: '03',
+    idx: '02',
     label: 'Approvals',
     title: 'CRZ approvals',
     body: 'Coastal Regulation Zone clearances carried through to sign-off — over 1,000 acres navigated for clients building along the coast.',
@@ -66,7 +51,7 @@ const PRACTICES: Practice[] = [
     },
   },
   {
-    idx: '04',
+    idx: '03',
     label: 'Interiors',
     title: 'Interior design',
     body: 'Bespoke, turnkey interiors for high-end residential and executive spaces — from material curation to final installation.',
@@ -97,7 +82,7 @@ export default function PracticeTabs() {
             What we practice
           </h2>
           <p className="hidden md:block max-w-[34ch] text-muted text-[15px] leading-relaxed">
-            Four disciplines, one continuous process — click through each.
+            Three strands of the practice, one continuous process — click through each.
           </p>
         </div>
 
