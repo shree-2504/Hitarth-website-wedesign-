@@ -77,11 +77,11 @@ export default function PracticeTabs() {
   return (
     <section id="practice" className="relative bg-paper/92 py-20 md:py-28">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
-        <div className="flex items-end justify-between gap-10 mb-10 md:mb-16">
-          <h2 className="font-display font-medium text-[clamp(28px,3.4vw,46px)] max-w-[14ch]">
-            What we practice
-          </h2>
-          <p className="hidden md:block max-w-[34ch] text-muted text-[15px] leading-relaxed">
+        {/* No section heading: the standfirst carries the lead on its own, so
+            it moves to the left where the title used to sit rather than
+            staying pinned right against nothing. */}
+        <div className="mb-10 md:mb-14">
+          <p className="max-w-[44ch] text-muted text-[15px] md:text-base leading-relaxed">
             Three strands of the practice, one continuous process — click through each.
           </p>
         </div>
@@ -109,7 +109,10 @@ export default function PracticeTabs() {
           {/* active panel */}
           <div key={active} className="animate-[fadein_0.5s_ease]">
             {current.icon}
-            <h3 className="font-display text-2xl md:text-3xl font-medium mt-6 mb-4">{current.title}</h3>
+            {/* h2, not h3: with the section heading gone this is the section's
+                top-level heading, and an h3 here would skip a level under the
+                page's h1. */}
+            <h2 className="font-display text-2xl md:text-3xl font-medium mt-6 mb-4">{current.title}</h2>
             <p className="text-muted text-base md:text-lg leading-relaxed max-w-[52ch]">{current.body}</p>
             {current.href && (
               <Link
