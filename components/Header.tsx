@@ -12,8 +12,9 @@ const LINKS = [
   { href: '/#contact', label: 'Contact' },
 ];
 
-// Only the home page opens on the full-bleed dark hero. Everywhere else the
-// header sits on paper from the first pixel, so it keeps its ink colours.
+// Routes that open on a full-bleed dark image, where ink nav and an ink logo
+// would be close to invisible until the header docks. Only the home page does
+// this — every other page starts on paper, so the header keeps its ink.
 const DARK_HERO_ROUTES = ['/'];
 
 export default function Header() {
