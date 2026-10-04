@@ -13,12 +13,22 @@ function formatCategory(cat: string) {
   return cat.charAt(0).toUpperCase() + cat.slice(1);
 }
 
-// Frames are a single landscape ratio and the columns align, which is how the
-// reference actually settles. An earlier pass gave each column a standing
-// offset after reading a frame caught mid-animation — the drift there is the
-// entrance, staggered in time, not a permanent step in the layout. That's
-// handled by the ScrollTrigger stagger below.
-const FRAME = 'aspect-[4/3]';
+// Cycled across the tiles so neighbours in a row end at different heights.
+// With `items-start` and no gutters, that difference is what gives the wall
+// its rhythm — a grid of identical rectangles reads as a contact sheet.
+//
+// A single column on a phone has no neighbours to play against, so the varied
+// ratios buy nothing there and each portrait tile eats a whole screen. Mobile
+// takes one short landscape ratio; the rhythm starts at sm. Full class strings,
+// since Tailwind only emits what it can see written out.
+const ASPECTS = [
+  'aspect-[4/3] sm:aspect-[4/5]',
+  'aspect-[4/3] sm:aspect-[3/4]',
+  'aspect-[4/3] sm:aspect-[5/7]',
+  'aspect-[4/3] sm:aspect-[4/5]',
+  'aspect-[4/3] sm:aspect-[1/1]',
+  'aspect-[4/3] sm:aspect-[3/4]',
+];
 
 export default function WorkGrid({ projects }: { projects: Project[] }) {
   const categories = ['all', ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))];
@@ -58,80 +68,76 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
   }, [activeCategory]);
 
   return (
-    <div ref={rootRef} className="max-w-[1240px] mx-auto px-6 md:px-10">
+    <div ref={rootRef}>
       {categories.length > 2 && (
-        <div className="flex flex-wrap gap-3 mb-12 md:mb-16">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              type="button"
-              onClick={() => setActiveCategory(cat)}
-              className={`font-mono text-xs tracking-widest uppercase py-2.5 px-4 border transition-colors ${
-                activeCategory === cat
-                  ? 'border-ink bg-ink text-paper'
-                  : 'border-ink/35 text-ink/70 hover:border-ink hover:text-ink'
-              }`}
-            >
-              {cat === 'all' ? 'All' : formatCategory(cat)}
-            </button>
-          ))}
+        <div className="max-w-[1240px] mx-auto px-6 md:px-10">
+          <div className="flex flex-wrap gap-3 mb-8 md:mb-10">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={`font-mono text-xs tracking-widest uppercase py-2.5 px-4 border transition-colors ${
+                  activeCategory === cat
+                    ? 'border-ink bg-ink text-paper'
+                    : 'border-ink/35 text-ink/70 hover:border-ink hover:text-ink'
+                }`}
+              >
+                {cat === 'all' ? 'All' : formatCategory(cat)}
+              </button>
+            ))}
+          </div>
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-10 gap-y-16 md:gap-y-20 items-start">
+      {/* Edge to edge and gutterless: the work meets the window, which is what
+          makes a project wall read as a body of work rather than a tray of
+          cards. Three columns divides the six projects into two full rows;
+          four would leave two dead cells on the second. */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-start">
         {filtered.map((p, i) => (
           <Link
             key={p.id}
             href={`/work/${p.slug}`}
-            data-cursor-label="Open"
-            className="group block"
+            data-cursor-label="View"
+            className={`reveal-clip group relative block overflow-hidden bg-[#1c1c1a] ${
+              ASPECTS[i % ASPECTS.length]
+            }`}
           >
-            <div className={`reveal-clip relative overflow-hidden bg-[#1c1c1a] ${FRAME}`}>
-              <Image
-                src={p.imageUrl}
-                alt=""
-                fill
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
-              />
-            </div>
+            <Image
+              src={p.imageUrl}
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 34vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
+            />
 
+            {/* Dark enough at top and bottom to hold the type on any render,
+                lightest across the middle so the building still reads. */}
+            <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/15 to-ink/70 transition-opacity duration-500 group-hover:from-ink/85 group-hover:to-ink/80" />
+
+            {/* Category set vertically up the left edge, like a drawing margin. */}
             {p.category && (
-              <span className="block mt-6 font-mono text-[10px] tracking-[0.22em] uppercase text-muted">
+              <span className="absolute left-4 bottom-5 font-mono text-[10px] tracking-[0.3em] uppercase text-paper/65 [writing-mode:vertical-rl] rotate-180">
                 {formatCategory(p.category)}
               </span>
             )}
 
-            <h2 className="font-display font-medium text-[19px] md:text-[21px] leading-[1.25] mt-2.5 max-w-[22ch] group-hover:text-accent transition-colors">
-              {p.title}
-            </h2>
+            <div className="absolute top-6 left-12 right-5">
+              <h2 className="font-display font-medium text-paper text-[19px] md:text-[21px] leading-[1.2]">
+                {p.title}
+              </h2>
+              {/* Several projects carry a location that merely repeats the
+                  category; show it only where it adds something. */}
+              {p.location && p.location.toLowerCase() !== (p.category || '').toLowerCase() && (
+                <span className="block mt-1.5 font-mono text-[10.5px] tracking-widest uppercase text-paper/70">
+                  {p.location}
+                </span>
+              )}
+            </div>
 
-            {/* Several projects carry a location that just repeats the
-                category — "Institutional" set under an INSTITUTIONAL label.
-                Show the line only when it adds something. */}
-            {p.location && p.location.toLowerCase() !== (p.category || '').toLowerCase() && (
-              <span className="block mt-1.5 text-muted text-[13.5px] leading-relaxed">
-                {p.location}
-              </span>
-            )}
-
-            {/* Label, a long rule, and a ring sitting over the end of it — the
-                rule reads as the arrow's shaft running into the head. The rule
-                lengthens on hover rather than the whole control moving. */}
-            <span className="mt-6 flex items-center font-mono text-[10px] tracking-[0.18em] uppercase text-ink">
-              View project
-              <span
-                aria-hidden="true"
-                className="ml-4 h-px w-12 bg-ink/45 transition-all duration-300 group-hover:w-16 group-hover:bg-ink"
-              />
-              <span
-                aria-hidden="true"
-                className="-ml-3 w-7 h-7 rounded-full border border-ink/35 flex items-center justify-center bg-paper transition-colors duration-300 group-hover:bg-ink group-hover:border-ink group-hover:text-paper"
-              >
-                <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-current fill-none" strokeWidth={1.75}>
-                  <path d="M5 12h13M12 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </span>
+            <span className="absolute bottom-5 right-5 font-mono text-[10px] tracking-widest uppercase text-paper opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+              View →
             </span>
           </Link>
         ))}

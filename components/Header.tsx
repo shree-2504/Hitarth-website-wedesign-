@@ -13,9 +13,10 @@ const LINKS = [
 ];
 
 // Routes that open on a full-bleed dark image, where ink nav and an ink logo
-// would be close to invisible until the header docks. Only the home page does
-// this — every other page starts on paper, so the header keeps its ink.
-const DARK_HERO_ROUTES = ['/'];
+// would be close to invisible until the header docks. Matched exactly, so
+// /work is listed but /work/<slug> is not — project pages start on paper,
+// their photograph beginning below the header.
+const DARK_HERO_ROUTES = ['/', '/work'];
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
