@@ -3,15 +3,10 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import MagneticLink from './MagneticLink';
+import { NAV_LINKS } from '@/lib/site';
 
-// Pared back to the three destinations worth a permanent slot. Studio and
-// Practice are sections in the homepage scroll and both remain in the footer,
-// which still carries the full set.
-const LINKS = [
-  { href: '/work', label: 'Projects' },
-  { href: '/interiors', label: 'Interiors' },
-  { href: '/#contact', label: 'Contact' },
-];
+// Shared with the footer — see NAV_LINKS in lib/site.
+const LINKS = NAV_LINKS;
 
 // Routes that open on a full-bleed dark image, where ink nav and an ink logo
 // would be close to invisible until the header docks. Matched exactly, so

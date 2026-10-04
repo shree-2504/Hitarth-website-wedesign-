@@ -1,12 +1,4 @@
-import { SITE, MAPS_URL } from '@/lib/site';
-
-const NAV = [
-  { label: 'Studio', href: '/#studio' },
-  { label: 'Practice', href: '/#practice' },
-  { label: 'Interiors', href: '/interiors' },
-  { label: 'Work', href: '/work' },
-  { label: 'Contact', href: '/#contact' },
-];
+import { SITE, MAPS_URL, NAV_LINKS } from '@/lib/site';
 
 const linkClass =
   'font-mono text-xs uppercase tracking-wide text-muted hover:text-ink transition-colors';
@@ -41,7 +33,7 @@ export default function Footer() {
           </a>
 
           <nav aria-label="Footer" className="flex gap-8 flex-wrap md:justify-center h-fit">
-            {NAV.map((l) => (
+            {NAV_LINKS.map((l) => (
               <a key={l.label} href={l.href} className={linkClass}>
                 {l.label}
               </a>

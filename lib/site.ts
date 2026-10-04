@@ -46,6 +46,20 @@ export const SITE = {
 export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${SITE.geo.lat},${SITE.geo.lng}`;
 
 /**
+ * The site's navigation, read by both the header and the footer.
+ *
+ * These were two separate arrays, which is how the footer came to be still
+ * offering Studio, Practice and Work after the header had been pared back to
+ * three — a visitor met two different ideas of the site depending on which end
+ * of the page they were at.
+ */
+export const NAV_LINKS = [
+  { href: '/work', label: 'Projects' },
+  { href: '/interiors', label: 'Interiors' },
+  { href: '/#contact', label: 'Contact' },
+] as const;
+
+/**
  * Schema.org node describing the studio. Google uses this for the knowledge
  * panel / local results — the services list is what ties the studio to "CRZ
  * approval" searches, which is the practice's actual differentiator.
