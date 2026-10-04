@@ -22,9 +22,14 @@ export default async function WorkPage() {
             <h1 className="reveal font-display font-medium text-[clamp(34px,4.4vw,58px)] max-w-[16ch]">
               Selected work
             </h1>
+            {/* This used to print `{projects.length}+`, which rendered as
+                "7+ projects" — a number small enough to undercut the studio
+                rather than support it, and odd-looking with the plus. The
+                practice's actual record belongs in the claim; the page is a
+                selection from it. */}
             <p className="reveal max-w-[34ch] text-muted text-[15px] leading-relaxed">
-              {projects.length}+ residential, commercial, industrial and institutional projects —
-              from first sketch to CRZ sign-off.
+              A selection from 60+ residential, commercial, industrial and institutional
+              projects — from first sketch to CRZ sign-off.
             </p>
           </div>
 
