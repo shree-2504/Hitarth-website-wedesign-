@@ -124,7 +124,7 @@ export default function PracticeTabs() {
           {/* keyed on `active` so the image cross-fades with the copy */}
           <div
             key={`img-${active}`}
-            className="relative aspect-[4/5] bg-[#1c1c1a] overflow-hidden animate-[fadein_0.5s_ease]"
+            className="relative aspect-[4/5] bg-[#2D2D2D] overflow-hidden animate-[fadein_0.5s_ease]"
           >
             <Image
               src={current.image.src}

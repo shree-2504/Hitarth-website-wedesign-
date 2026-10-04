@@ -4,11 +4,11 @@ import { useState } from 'react';
 
 type Status = 'idle' | 'loading' | 'success' | 'error';
 
-// #3A2E22 sat at 1.44:1 against the ink section — the underlines were all but
-// invisible until focused. #7A6E5C clears the 3:1 bar for UI boundaries.
+// #6E6F71 sat at 1.44:1 against the ink section — the underlines were all but
+// invisible until focused. #6E6F71 clears the 3:1 bar for UI boundaries.
 const fieldClass =
-  'w-full bg-transparent border-b border-[#7A6E5C] focus:border-paper outline-none py-2.5 text-paper placeholder:text-[#9A8E7C] transition-colors';
-const labelClass = 'block font-mono text-[11px] tracking-widest uppercase text-[#C9C6BB] mb-2';
+  'w-full bg-transparent border-b border-[#6E6F71] focus:border-paper outline-none py-2.5 text-paper placeholder:text-[#6E6F71] transition-colors';
+const labelClass = 'block font-mono text-[11px] tracking-widest uppercase text-[#AFAEAC] mb-2';
 
 const PROJECT_TYPES = [
   'Residential',
@@ -56,7 +56,7 @@ export default function QueryForm() {
 
   if (status === 'success') {
     return (
-      <p className="font-mono text-sm tracking-wide uppercase text-[#C9C6BB]">
+      <p className="font-mono text-sm tracking-wide uppercase text-[#AFAEAC]">
         Thanks — we&apos;ve got your message and will get back to you shortly.
       </p>
     );

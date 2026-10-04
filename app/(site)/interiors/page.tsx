@@ -44,14 +44,14 @@ export default function InteriorsPage() {
                 at the wall.
               </h1>
 
-              <p className="reveal mt-6 max-w-[54ch] text-[15px] md:text-base leading-relaxed text-[#3B3934]">
+              <p className="reveal mt-6 max-w-[54ch] text-[15px] md:text-base leading-relaxed text-[#2F3031]">
                 The same studio that draws the building details the rooms inside it — bespoke,
                 turnkey interiors for high-end residential and executive spaces, from the first
                 material board to the final fitting.
               </p>
             </div>
 
-            <div className="reveal-clip relative aspect-[4/5] md:aspect-[4/5] bg-[#1c1c1a] overflow-hidden">
+            <div className="reveal-clip relative aspect-[4/5] md:aspect-[4/5] bg-[#2D2D2D] overflow-hidden">
               <Image
                 src="/images/interior/entrance-lobby-1.jpg"
                 alt="Entrance lobby with reception desk, designed and fitted out by We Design Architects"

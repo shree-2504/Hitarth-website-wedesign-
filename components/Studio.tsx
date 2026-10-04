@@ -9,12 +9,12 @@ export default function Studio() {
             complete it, not just the form it takes.
           </p>
           <div>
-            <p className="reveal text-lg leading-relaxed text-[#3B3934] mb-5">
+            <p className="reveal text-lg leading-relaxed text-[#2F3031] mb-5">
               We&apos;re your partner across that whole journey: planning, designing and
               securing CRZ approvals for work that ranges from high-end residential lifestyle
               towers to sprawling commercial complexes and large industrial layouts.
             </p>
-            <p className="reveal text-lg leading-relaxed text-[#3B3934]">
+            <p className="reveal text-lg leading-relaxed text-[#2F3031]">
               Fifteen years in, that partnership is built on the same two things every client
               tells us they came back for — reliability and trust.
             </p>

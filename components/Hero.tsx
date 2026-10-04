@@ -147,26 +147,26 @@ export default function Hero({ projects }: { projects: Project[] }) {
 
       <div
         className="absolute inset-0 mix-blend-multiply"
-        style={{ background: 'linear-gradient(180deg, rgba(72,37,47,0.35), rgba(16,18,17,0.6) 70%)' }}
+        style={{ background: 'linear-gradient(180deg, rgba(93,106,112,0.35), rgba(0,0,0,0.62) 70%)' }}
       />
 
       {/* Counter, set large the way the reference does — the slide position is
           part of the composition rather than a control tucked in a corner. */}
       <div className="absolute top-0 left-0 z-[3] hidden md:flex items-end gap-1 bg-ink/85 backdrop-blur-sm pl-6 pr-7 pt-[88px] pb-7">
-        <span className="font-display font-medium text-[#F4EDE0] text-[44px] leading-none tabular-nums">
+        <span className="font-display font-medium text-[#FFFFFF] text-[44px] leading-none tabular-nums">
           {String(active + 1).padStart(2, '0')}
         </span>
-        <span className="font-mono text-[11px] text-[#F4EDE0]/50 tracking-widest mb-1.5">
+        <span className="font-mono text-[11px] text-[#FFFFFF]/50 tracking-widest mb-1.5">
           / {String(slides.length).padStart(2, '0')}
         </span>
       </div>
 
       {/* The practice, running up the left edge like a drawing margin. */}
-      <span className="absolute left-5 top-1/2 -translate-y-1/2 z-[3] hidden lg:block font-mono text-[10px] tracking-[0.34em] uppercase text-[#F4EDE0]/45 [writing-mode:vertical-rl] rotate-180">
+      <span className="absolute left-5 top-1/2 -translate-y-1/2 z-[3] hidden lg:block font-mono text-[10px] tracking-[0.34em] uppercase text-[#FFFFFF]/45 [writing-mode:vertical-rl] rotate-180">
         Planning · Design · CRZ Approvals
       </span>
 
-      <div className="relative z-[2] h-full flex flex-col justify-end px-6 md:px-10 pb-16 text-[#F4EDE0]">
+      <div className="relative z-[2] h-full flex flex-col justify-end px-6 md:px-10 pb-16 text-[#FFFFFF]">
         <div className="max-w-[1240px] mx-auto w-full">
           {/* Fixed: the thesis does not rotate with the work. */}
           <p className="font-mono text-[11px] tracking-[0.22em] uppercase text-accent-light mb-6">
@@ -180,7 +180,7 @@ export default function Hero({ projects }: { projects: Project[] }) {
               </span>
             </h1>
 
-            <p className="hero-fade mt-5 max-w-[48ch] text-[15px] md:text-base leading-relaxed text-[#D9D2C4]">
+            <p className="hero-fade mt-5 max-w-[48ch] text-[15px] md:text-base leading-relaxed text-[#AFAEAC]">
               {current.description ??
                 'A Mumbai-based studio specialising in planning, design and CRZ approvals.'}
             </p>
@@ -188,7 +188,7 @@ export default function Hero({ projects }: { projects: Project[] }) {
             <Link
               href={`/work/${current.slug}`}
               data-cursor-label="View"
-              className="hero-fade mt-8 inline-flex items-center gap-3 border border-[#F4EDE0]/45 hover:border-[#F4EDE0] hover:bg-[#F4EDE0] hover:text-ink transition-colors px-7 py-3.5 font-mono text-[11px] tracking-[0.18em] uppercase"
+              className="hero-fade mt-8 inline-flex items-center gap-3 border border-[#FFFFFF]/45 hover:border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-ink transition-colors px-7 py-3.5 font-mono text-[11px] tracking-[0.18em] uppercase"
             >
               Look more
               <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 stroke-current fill-none" strokeWidth={1.6}>
@@ -203,16 +203,16 @@ export default function Hero({ projects }: { projects: Project[] }) {
                 type="button"
                 onClick={() => go(-1)}
                 aria-label="Previous project"
-                className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#F4EDE0]/60 hover:text-[#F4EDE0] transition-colors"
+                className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors"
               >
                 ← Prev
               </button>
-              <span className="h-px w-10 bg-[#F4EDE0]/30" />
+              <span className="h-px w-10 bg-[#FFFFFF]/30" />
               <button
                 type="button"
                 onClick={() => go(1)}
                 aria-label="Next project"
-                className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#F4EDE0]/60 hover:text-[#F4EDE0] transition-colors"
+                className="font-mono text-[10px] tracking-[0.22em] uppercase text-[#FFFFFF]/60 hover:text-[#FFFFFF] transition-colors"
               >
                 Next →
               </button>
@@ -227,7 +227,7 @@ export default function Hero({ projects }: { projects: Project[] }) {
                     aria-label={`Show ${s.title}`}
                     aria-current={i === active}
                     className={`h-[2px] transition-all duration-500 ${
-                      i === active ? 'w-9 bg-[#F4EDE0]' : 'w-4 bg-[#F4EDE0]/35 hover:bg-[#F4EDE0]/60'
+                      i === active ? 'w-9 bg-[#FFFFFF]' : 'w-4 bg-[#FFFFFF]/35 hover:bg-[#FFFFFF]/60'
                     }`}
                   />
                 ))}
@@ -243,8 +243,8 @@ export default function Hero({ projects }: { projects: Project[] }) {
         {`Project ${active + 1} of ${slides.length}: ${current.title}`}
       </p>
 
-      <div className="absolute bottom-7 right-6 md:right-10 z-[2] flex items-center gap-2.5 text-[#F4EDE0] font-mono text-[11px] tracking-widest uppercase">
-        <span className="relative w-px h-[34px] bg-[#F4EDE0] overflow-hidden">
+      <div className="absolute bottom-7 right-6 md:right-10 z-[2] flex items-center gap-2.5 text-[#FFFFFF] font-mono text-[11px] tracking-widest uppercase">
+        <span className="relative w-px h-[34px] bg-[#FFFFFF] overflow-hidden">
           <span className="absolute left-0 w-full h-full bg-accent animate-scrollcue" />
         </span>
         Scroll

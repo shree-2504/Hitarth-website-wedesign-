@@ -54,16 +54,16 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  // Over the dark hero the ink nav/logo are near-invisible (#101211 text on a
+  // Over the dark hero the ink nav/logo are near-invisible (#000000 text on a
   // near-black photo), so flip the whole header to paper until it docks.
   const overHero = DARK_HERO_ROUTES.includes(pathname) && !scrolled && !menuOpen;
-  const logoInk = overHero ? '#F4EDE0' : '#58595B';
+  const logoInk = overHero ? '#FFFFFF' : '#58595B';
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-[100] h-[76px] flex items-center transition-colors duration-300 border-b ${
         scrolled || menuOpen ? 'bg-paper/90 backdrop-blur-md border-line' : 'border-transparent'
-      } ${overHero ? 'text-[#F4EDE0]' : 'text-ink'}`}
+      } ${overHero ? 'text-[#FFFFFF]' : 'text-ink'}`}
     >
       <div className="w-full max-w-[1240px] mx-auto px-6 md:px-10 flex items-center justify-between">
         <a href="/#top" className="flex flex-col items-center leading-none select-none">
@@ -111,8 +111,8 @@ export default function Header() {
                 className={`text-[12px] tracking-wide uppercase font-mono px-3.5 lg:px-4 py-2 border transition-colors duration-300 ${
                   overHero
                     ? current
-                      ? 'bg-[#F4EDE0] text-ink border-[#F4EDE0]'
-                      : 'border-[#F4EDE0]/30 hover:border-[#F4EDE0] hover:bg-[#F4EDE0] hover:text-ink'
+                      ? 'bg-[#FFFFFF] text-ink border-[#FFFFFF]'
+                      : 'border-[#FFFFFF]/30 hover:border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-ink'
                     : current
                       ? 'bg-ink text-paper border-ink'
                       : 'border-ink/25 hover:border-ink hover:bg-ink hover:text-paper'
@@ -128,7 +128,7 @@ export default function Header() {
           href="/#contact"
           className={`hidden md:inline-flex border px-5 py-2.5 text-xs font-mono tracking-wide uppercase transition-colors ${
             overHero
-              ? 'border-[#F4EDE0] hover:bg-[#F4EDE0] hover:text-ink'
+              ? 'border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-ink'
               : 'border-ink hover:bg-ink hover:text-paper'
           }`}
         >

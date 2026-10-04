@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             </span>
           )}
           {project.description && (
-            <p className="mt-8 text-lg leading-relaxed text-[#3B3934] max-w-[68ch]">
+            <p className="mt-8 text-lg leading-relaxed text-[#2F3031] max-w-[68ch]">
               {project.description}
             </p>
           )}

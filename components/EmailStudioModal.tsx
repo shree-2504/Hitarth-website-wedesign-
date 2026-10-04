@@ -58,7 +58,7 @@ export default function EmailStudioModal() {
                 className="absolute inset-0 bg-ink/90 backdrop-blur-sm cursor-pointer"
               />
 
-              <div className="relative bg-ink border border-[#3A2E22] w-full max-w-[520px] max-h-[88vh] overflow-y-auto p-8 md:p-10 text-left">
+              <div className="relative bg-ink border border-[#6E6F71] w-full max-w-[520px] max-h-[88vh] overflow-y-auto p-8 md:p-10 text-left">
                 <button
                   type="button"
                   aria-label="Close"
@@ -72,7 +72,7 @@ export default function EmailStudioModal() {
 
                 <div
                   className="eyebrow justify-start mb-5"
-                  style={{ '--eyebrow-color': '#C48F98' } as React.CSSProperties}
+                  style={{ '--eyebrow-color': '#8A99A0' } as React.CSSProperties}
                 >
                   Email the studio
                 </div>

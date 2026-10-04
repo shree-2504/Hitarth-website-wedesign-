@@ -7,8 +7,8 @@ html {
 }
 
 body {
-  background: #E7D4BB;
-  color: #101211;
+  background: #F2EFEA;
+  color: #000000;
   overflow-x: hidden;
 }
 
@@ -27,7 +27,7 @@ html.lenis, html.lenis body {
 }
 
 .eyebrow {
-  --eyebrow-color: #48252F;
+  --eyebrow-color: #5D6A70;
   font-family: var(--font-plexmono), monospace;
   font-size: 12px;
   letter-spacing: 0.14em;
@@ -73,8 +73,8 @@ html.lenis, html.lenis body {
 
 /* Minimal dot cursor.
    Under mix-blend-mode: difference the painted colour is subtracted from the
-   backdrop, so one value covers both themes. #D7C2AA is chosen as
-   paper(#E7D4BB) − ink(#101211): over the paper sections the dot resolves to
+   backdrop, so one value covers both themes. #F2EFEA is chosen as
+   paper(#F2EFEA) − ink(#000000): over the paper sections the dot resolves to
    exactly the site's ink, and over the dark hero it inverts to a warm light
    tone. Plain white would work too, but differences to a cold navy on paper. */
 .site-cursor {
@@ -102,14 +102,14 @@ html.lenis, html.lenis body {
   height: 7px;
   margin: -3.5px 0 0 -3.5px;
   border-radius: 50%;
-  background: #D7C2AA;
+  background: #F2EFEA;
 }
 .site-cursor-ring {
   width: 30px;
   height: 30px;
   margin: -15px 0 0 -15px;
   border-radius: 50%;
-  border: 1px solid #D7C2AA;
+  border: 1px solid #F2EFEA;
   opacity: 0.75;
 }
 /* Sits clear of the ring's 15px radius so the two never overlap. */
@@ -121,7 +121,7 @@ html.lenis, html.lenis body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   white-space: nowrap;
-  color: #D7C2AA;
+  color: #F2EFEA;
   opacity: 0;
   transform: translateX(-6px);
 }
@@ -210,7 +210,7 @@ html.lenis, html.lenis body {
   position: fixed;
   inset: 0;
   z-index: -10;
-  background: linear-gradient(180deg, #F2E7D3 0%, #E7D4BB 55%, #CAB8A0 100%);
+  background: linear-gradient(180deg, #F7F5F2 0%, #F2EFEA 55%, #CAC9C7 100%);
 }
 .contour-backdrop svg {
   width: 100%;
@@ -218,12 +218,12 @@ html.lenis, html.lenis body {
 }
 .contour-ring {
   fill: none;
-  stroke: #101211;
+  stroke: #000000;
   stroke-width: 1;
   opacity: 0.16;
 }
 .contour-ring--index {
-  stroke: #857861;
+  stroke: #AFAEAC;
   stroke-width: 1.4;
   opacity: 0.34;
 }
@@ -231,7 +231,7 @@ html.lenis, html.lenis body {
   font-family: var(--font-plexmono), monospace;
   font-size: 13px;
   letter-spacing: 0.08em;
-  fill: #857861;
+  fill: #AFAEAC;
   opacity: 0.4;
 }
 .contour-cluster {

@@ -29,7 +29,7 @@ export default function NotFoundContent() {
           That page isn&apos;t <em className="not-italic md:italic text-accent">in the set</em>.
         </h1>
 
-        <p className="mt-6 max-w-[54ch] text-[15px] md:text-base leading-relaxed text-[#3B3934]">
+        <p className="mt-6 max-w-[54ch] text-[15px] md:text-base leading-relaxed text-[#2F3031]">
           Nothing is drawn at this address. The link may be out of date, or the page may have
           moved since it was shared — the work itself is all still here.
         </p>

@@ -35,7 +35,9 @@ export default async function WorkPage() {
           <h1 className="font-display font-medium text-paper text-[clamp(30px,6vw,64px)] tracking-[0.2em] uppercase">
             Projects
           </h1>
-          <p className="mt-5 max-w-[46ch] text-[#D9D2C4] text-[14px] md:text-[15px] leading-relaxed">
+          {/* Light grey sat too close to the render behind it here — the tower
+              is brightest exactly where this line falls. */}
+          <p className="mt-5 max-w-[46ch] text-paper/85 text-[14px] md:text-[15px] leading-relaxed">
             A selection from 60+ residential, commercial, industrial and institutional
             projects — from first sketch to CRZ sign-off.
           </p>

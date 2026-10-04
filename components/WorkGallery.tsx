@@ -137,7 +137,7 @@ export default function WorkGallery({
                 onClick={() => onSelect(p)}
                 aria-label={`View details for ${p.title}`}
                 data-cursor-label="View"
-                className="reveal-clip group relative block w-full aspect-[4/5] bg-[#1c1c1a] overflow-hidden text-left"
+                className="reveal-clip group relative block w-full aspect-[4/5] bg-[#2D2D2D] overflow-hidden text-left"
               >
                 <Image
                   src={p.imageUrl}

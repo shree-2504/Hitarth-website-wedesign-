@@ -100,7 +100,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
             key={p.id}
             href={`/work/${p.slug}`}
             data-cursor-label="View"
-            className={`reveal-clip group relative block overflow-hidden bg-[#1c1c1a] ${
+            className={`reveal-clip group relative block overflow-hidden bg-[#2D2D2D] ${
               ASPECTS[i % ASPECTS.length]
             }`}
           >

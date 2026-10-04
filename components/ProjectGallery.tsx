@@ -46,7 +46,7 @@ export default function ProjectGallery({ images, title }: { images: string[]; ti
             type="button"
             onClick={() => setIndex(i)}
             aria-label={`View ${title} image ${i + 1} larger`}
-            className="group relative block w-full aspect-[4/5] bg-[#1c1c1a] overflow-hidden"
+            className="group relative block w-full aspect-[4/5] bg-[#2D2D2D] overflow-hidden"
           >
             <Image
               src={src}
@@ -85,7 +85,7 @@ export default function ProjectGallery({ images, title }: { images: string[]; ti
                 </div>
                 <div className="mt-4 flex items-center justify-between text-paper">
                   <span className="font-display text-lg">{title}</span>
-                  <span className="font-mono text-xs tracking-wide uppercase text-[#C9C6BB]">
+                  <span className="font-mono text-xs tracking-wide uppercase text-[#AFAEAC]">
                     {index + 1} / {images.length}
                   </span>
                 </div>

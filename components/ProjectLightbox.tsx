@@ -67,7 +67,7 @@ export default function ProjectLightbox({
         className="absolute inset-0 bg-ink/85 backdrop-blur-sm cursor-pointer"
       />
       <div className="relative bg-paper w-full max-w-[920px] max-h-[88vh] overflow-y-auto grid md:grid-cols-[1.1fr_0.9fr] shadow-2xl">
-        <div className="relative aspect-[4/5] md:aspect-auto md:h-full bg-[#1c1c1a]">
+        <div className="relative aspect-[4/5] md:aspect-auto md:h-full bg-[#2D2D2D]">
           <Image
             key={current}
             src={current}
@@ -102,7 +102,7 @@ export default function ProjectLightbox({
               </span>
             )}
             {project.description && (
-              <p className="mt-6 text-[15px] leading-relaxed text-[#3B3934]">
+              <p className="mt-6 text-[15px] leading-relaxed text-[#2F3031]">
                 {project.description}
               </p>
             )}

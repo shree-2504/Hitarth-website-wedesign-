@@ -52,7 +52,7 @@ export default function InteriorGallery({ projects }: { projects: InteriorProjec
                   onClick={() => setActive({ project, index: i })}
                   aria-label={`View ${img.alt} larger`}
                   data-cursor-label="Enlarge"
-                  className="reveal-clip group relative block w-full aspect-[4/5] bg-[#1c1c1a] overflow-hidden text-left"
+                  className="reveal-clip group relative block w-full aspect-[4/5] bg-[#2D2D2D] overflow-hidden text-left"
                 >
                   <Image
                     src={img.src}
@@ -93,7 +93,7 @@ export default function InteriorGallery({ projects }: { projects: InteriorProjec
             </div>
             <div className="mt-4 flex items-center justify-between text-paper">
               <span className="font-display text-lg">{active.project.title}</span>
-              <span className="font-mono text-xs tracking-wide uppercase text-[#C9C6BB]">
+              <span className="font-mono text-xs tracking-wide uppercase text-[#AFAEAC]">
                 {active.index + 1} / {active.project.images.length}
               </span>
             </div>
