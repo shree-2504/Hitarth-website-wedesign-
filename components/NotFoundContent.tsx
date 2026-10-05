@@ -21,7 +21,7 @@ const LINKS = [
  */
 export default function NotFoundContent() {
   return (
-    <section className="bg-paper/55 pt-[140px] md:pt-[168px] pb-24 md:pb-[120px]">
+    <section className="bg-paper/40 pt-[140px] md:pt-[168px] pb-24 md:pb-[120px]">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         <div className="eyebrow mb-5">Error 404</div>
 

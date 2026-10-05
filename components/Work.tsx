@@ -19,7 +19,7 @@ export default function Work({ projects }: { projects: Project[] }) {
     activeCategory === 'all' ? projects : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="work" className="bg-paper/55 py-24 md:py-[120px] overflow-hidden">
+    <section id="work" className="bg-paper/40 py-24 md:py-[120px] overflow-hidden">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 mb-10">
           <h2 className="reveal font-display font-medium text-[clamp(30px,3.4vw,46px)] max-w-[14ch]">

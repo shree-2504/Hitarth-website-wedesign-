@@ -27,7 +27,7 @@ html.lenis, html.lenis body {
 }
 
 .eyebrow {
-  --eyebrow-color: #555F65;
+  --eyebrow-color: #475157;
   font-family: var(--font-plexmono), monospace;
   font-size: 12px;
   letter-spacing: 0.14em;
