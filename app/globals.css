@@ -206,11 +206,25 @@ html.lenis, html.lenis body {
 }
 
 /* Topographic contour-line backdrop */
+/* Concrete tile under a soft vertical wash. The tile is mirrored 2x2 so its
+   edges meet exactly and it repeats without a visible grid; `fixed` keeps it
+   still while the page scrolls, so it reads as a wall the content sits on
+   rather than a pattern travelling with it.
+   520px keeps the grain at roughly the scale of the original photograph —
+   repeating the full 1040px tile makes its symmetry start to show. */
 .contour-backdrop {
   position: fixed;
   inset: 0;
   z-index: -10;
-  background: linear-gradient(180deg, #F7F5F2 0%, #F2EFEA 55%, #CAC9C7 100%);
+  /* No gradient wash over the tile. One was tried and it, plus the 70% paper
+     the sections lay on top, left only ~18% of the grain visible — about 7
+     levels, which reads as a flat colour. The texture carries the surface on
+     its own. */
+  background-color: #F2EFEA;
+  background-image: url('/images/concrete-tile.jpg');
+  background-repeat: repeat;
+  background-size: 520px 520px;
+  background-attachment: fixed;
 }
 .contour-backdrop svg {
   width: 100%;

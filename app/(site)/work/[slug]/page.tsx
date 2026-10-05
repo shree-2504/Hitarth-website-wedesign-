@@ -76,7 +76,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
         />
       </div>
 
-      <section className="bg-paper/90 py-16 md:py-24">
+      <section className="bg-paper/55 py-16 md:py-24">
         <div className="max-w-[880px] mx-auto px-6 md:px-10">
           <Link
             href="/work"

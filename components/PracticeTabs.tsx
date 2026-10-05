@@ -75,7 +75,7 @@ export default function PracticeTabs() {
   const current = PRACTICES[active];
 
   return (
-    <section id="practice" className="relative bg-paper/92 py-20 md:py-28">
+    <section id="practice" className="relative bg-paper/55 py-20 md:py-28">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         {/* No section heading: the standfirst carries the lead on its own, so
             it moves to the left where the title used to sit rather than

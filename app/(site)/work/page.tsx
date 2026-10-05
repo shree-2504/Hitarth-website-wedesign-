@@ -46,7 +46,7 @@ export default async function WorkPage() {
 
       {/* The grid sets its own width so the tiles run to the window edge; only
           the filter row is held to the text column. */}
-      <section className="bg-paper/90 pt-9 md:pt-12 pb-24 md:pb-[120px]">
+      <section className="bg-paper/55 pt-9 md:pt-12 pb-24 md:pb-[120px]">
         <WorkGrid projects={projects} />
       </section>
 

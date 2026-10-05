@@ -94,7 +94,7 @@ export default function Stats() {
   }, []);
 
   return (
-    <div ref={rootRef} className="border-y border-line bg-paper/90">
+    <div ref={rootRef} className="border-y border-line bg-paper/55">
       {/* Separate cards rather than one row divided by rules: each credential
           is its own claim, and the practice's record is the strongest thing on
           the page after the hero. */}
