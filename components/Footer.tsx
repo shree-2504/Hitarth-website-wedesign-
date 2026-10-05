@@ -3,9 +3,21 @@ import { SITE, MAPS_URL, NAV_LINKS } from '@/lib/site';
 const linkClass =
   'font-mono text-xs uppercase tracking-wide text-muted hover:text-ink transition-colors';
 
+// The studio's own red, carried deep enough to read at 12px. The logo's
+// #E31E24 is built for a small mark on white and measures 3.1:1 on the
+// footer's ground — unreadable as body text. This is the same hue at 4.6:1.
+// The wordmark above keeps the true logo red, where it belongs.
+const BRAND_RED = '#B3161B';
+
+const contactClass =
+  'font-mono text-xs uppercase tracking-wide transition-opacity hover:opacity-70';
+
 export default function Footer() {
   return (
-    <footer className="py-14 pb-10">
+    // Given a ground of its own. Every other section sits on paper over the
+    // concrete; the footer alone sat on the bare texture, which left it both
+    // inconsistent and too dark for anything but near-black type.
+    <footer className="bg-paper/40 py-14 pb-10">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10 border-t border-line pt-9">
         <div className="grid gap-10 md:grid-cols-[auto_1fr_auto] md:gap-16">
           <a href="/#top" className="flex flex-col items-center leading-none select-none self-start">
@@ -44,17 +56,26 @@ export default function Footer() {
               with nothing to act on — phone and email are the two things a
               prospective client actually wants at the bottom of the page. */}
           <div className="flex flex-col gap-2 md:items-end md:text-right">
-            <a href={`tel:${SITE.phoneHref}`} className={linkClass}>
+            <a
+              href={`tel:${SITE.phoneHref}`}
+              className={contactClass}
+              style={{ color: BRAND_RED }}
+            >
               {SITE.phone}
             </a>
-            <a href={`mailto:${SITE.email}`} className={linkClass}>
+            <a
+              href={`mailto:${SITE.email}`}
+              className={contactClass}
+              style={{ color: BRAND_RED }}
+            >
               {SITE.email}
             </a>
             <a
               href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className={linkClass}
+              className={contactClass}
+              style={{ color: BRAND_RED }}
             >
               {SITE.address.full} ↗
             </a>

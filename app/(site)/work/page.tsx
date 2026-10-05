@@ -48,6 +48,30 @@ export default async function WorkPage() {
           the filter row is held to the text column. */}
       <section className="bg-paper/40 pt-9 md:pt-12 pb-24 md:pb-[120px]">
         <WorkGrid projects={projects} />
+
+        {/* The page shows six projects against a claim of sixty-plus. Rather
+            than leave that gap unaddressed, it becomes the invitation. */}
+        <div className="max-w-[1240px] mx-auto px-6 md:px-10 mt-16 md:mt-20">
+          <div className="border-t border-line pt-10 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-5">
+            <p className="font-display text-xl md:text-2xl font-medium max-w-[26ch] leading-snug">
+              And many more.
+            </p>
+            <a
+              href="/#contact"
+              className="group inline-flex items-center gap-3 font-mono text-[11px] tracking-[0.18em] uppercase text-accent hover:text-ink transition-colors"
+            >
+              Contact the studio for the rest of the portfolio
+              <span
+                aria-hidden="true"
+                className="w-8 h-8 shrink-0 rounded-full border border-accent/40 flex items-center justify-center transition-colors duration-300 group-hover:bg-ink group-hover:border-ink group-hover:text-paper"
+              >
+                <svg viewBox="0 0 24 24" className="w-3 h-3 stroke-current fill-none" strokeWidth={1.75}>
+                  <path d="M5 12h13M12 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <Contact />

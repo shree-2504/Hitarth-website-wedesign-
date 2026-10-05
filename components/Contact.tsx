@@ -12,9 +12,14 @@ export default function Contact() {
         >
           Start a project
         </div>
+        {/* The true logo red, not the deepened one the footer needs. At this
+            size it counts as large text, where the bar is 3:1 — it measures
+            4.48:1 on the ink ground, so the brand red works here unmodified. */}
         <h2 className="reveal font-display font-medium leading-[1.15] text-[clamp(32px,4.6vw,58px)]">
-          Bring us the site. <em className="text-accent-light not-italic md:italic">We&apos;ll write</em>{' '}
-          what it becomes.
+          Design. Approvals.{' '}
+          <em className="not-italic md:italic" style={{ color: '#E31E24' }}>
+            Realisation.
+          </em>
         </h2>
         <p className="reveal mt-5 text-[#AFAEAC] text-base leading-relaxed">
           From first sketch to CRZ sign-off — tell us about your site and we&apos;ll take it from
