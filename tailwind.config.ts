@@ -25,7 +25,10 @@ const config: Config = {
 
         // Secondary text on stone. The grey swatch lands at 4.39:1, just under
         // the floor, so body copy takes this instead — 5.17:1.
-        muted: '#636466',
+        // Deepened when the concrete background brought the effective ground
+        // from 237 down to 224: the previous value fell to 4.49:1, a hair
+        // under the floor. Now 4.99:1.
+        muted: '#5C5D5F',
 
         // LIGHT GREY, only 1.93:1 on stone, so it is hairlines and dividers
         // rather than anything that has to be read.
@@ -35,7 +38,10 @@ const config: Config = {
         // the bar on both grounds — 4.87:1 on stone, and 5.58:1 as a button
         // ground behind white. So it takes the accent role outright.
         accent: {
-          DEFAULT: '#5D6A70',
+          // Stone grey, carried a shade deeper for the same reason as `muted`:
+          // against the 224 ground the swatch value measured 4.23:1. Now
+          // 4.95:1, and 6.54:1 as a button behind white.
+          DEFAULT: '#555F65',
           dim: '#4A555A',
           // The stone-grey swatch, which is the readable tone on black
           // (7.15:1).
