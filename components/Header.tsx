@@ -61,7 +61,10 @@ export default function Header() {
     >
       <div className="w-full max-w-[1240px] mx-auto px-6 md:px-10 flex items-center justify-between">
         <a href="/#top" className="flex flex-col items-center leading-none select-none">
-          <span className="font-display font-extrabold text-[24px] tracking-tight">
+          {/* Sized to use the header band properly: the mark plus rule plus
+              tagline comes to roughly 52px inside a 76px header, where before
+              it sat at about 42px and read as undersized against the nav. */}
+          <span className="font-display font-extrabold text-[30px] tracking-tight">
             <span style={{ color: '#E31E24' }}>W</span>
             <span style={{ color: logoInk }}>e</span>{' '}
             <span style={{ color: '#E31E24' }}>D</span>
@@ -70,7 +73,7 @@ export default function Header() {
               <span className="relative inline-block leading-none">
                 <span
                   aria-hidden="true"
-                  className="absolute left-1/2 -translate-x-1/2 top-[1px] w-[5px] h-[5px]"
+                  className="absolute left-1/2 -translate-x-1/2 top-[1px] w-[6px] h-[6px]"
                   style={{ backgroundColor: '#E31E24' }}
                 />
                 ı
@@ -79,11 +82,11 @@ export default function Header() {
             </span>
           </span>
           <span
-            className="w-full h-[2px] mt-[3px] transition-colors duration-300"
+            className="w-full h-[2px] mt-[4px] transition-colors duration-300"
             style={{ backgroundColor: logoInk }}
           />
           <span
-            className="mt-[3px] font-sans text-[10px] tracking-wide transition-colors duration-300"
+            className="mt-[4px] font-sans text-[11.5px] tracking-wide transition-colors duration-300"
             style={{ color: logoInk }}
           >
             Architectural consultant

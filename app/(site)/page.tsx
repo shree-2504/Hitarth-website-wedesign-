@@ -11,7 +11,7 @@ export default async function Home() {
 
   return (
     <>
-      <Hero projects={projects} />
+      <Hero />
       <Stats />
       <Studio />
       <PracticeTabs />

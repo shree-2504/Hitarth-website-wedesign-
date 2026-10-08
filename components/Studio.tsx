@@ -1,6 +1,6 @@
 export default function Studio() {
   return (
-    <section id="studio" className="bg-paper-2/55 py-24 md:py-[120px]">
+    <section id="studio" className="bg-paper-2/55 py-14 md:py-20">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         <div className="eyebrow reveal mb-5">About the studio</div>
         <div className="grid md:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-20 items-start">

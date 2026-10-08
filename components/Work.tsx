@@ -19,20 +19,20 @@ export default function Work({ projects }: { projects: Project[] }) {
     activeCategory === 'all' ? projects : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="work" className="bg-paper/40 py-24 md:py-[120px] overflow-hidden">
+    <section id="work" className="bg-paper/40 py-14 md:py-20 overflow-hidden">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-10 mb-6 md:mb-7">
           <h2 className="reveal font-display font-medium text-[clamp(30px,3.4vw,46px)] max-w-[14ch]">
             Selected work
           </h2>
           <div className="reveal flex flex-col items-start md:items-end gap-4">
-            <p className="max-w-[34ch] text-muted text-[15px] leading-relaxed">
+            <p className="max-w-[34ch] text-muted text-[17px] md:text-[18px] leading-relaxed">
               60+ residential, commercial and industrial projects — a sample of what&apos;s on
               the drawing board and what&apos;s built.
             </p>
             <Link
               href="/work"
-              className="font-mono text-xs tracking-widest uppercase border-b border-ink pb-0.5 hover:text-accent hover:border-accent transition-colors"
+              className="font-mono text-[13px] tracking-widest uppercase border-b border-ink pb-0.5 hover:text-accent hover:border-accent transition-colors"
             >
               View all work →
             </Link>
@@ -40,7 +40,7 @@ export default function Work({ projects }: { projects: Project[] }) {
         </div>
 
         {categories.length > 2 && (
-          <div className="reveal flex flex-wrap gap-3 mb-10 md:mb-14">
+          <div className="reveal flex flex-wrap gap-3 mb-8 md:mb-10">
             {categories.map((cat) => (
               <button
                 key={cat}

@@ -29,8 +29,8 @@ const PRACTICES: Practice[] = [
       </svg>
     ),
     image: {
-      src: '/images/residential-tower-1.jpg',
-      alt: 'Gulmohar Homes residential tower, street elevation',
+      src: '/images/coastal-towers.jpg',
+      alt: 'Seasons, a multi-tower residential masterplan, aerial view',
     },
   },
   {
@@ -46,8 +46,8 @@ const PRACTICES: Practice[] = [
       </svg>
     ),
     image: {
-      src: '/images/coastal-towers.jpg',
-      alt: 'Coastal residential development of the kind that requires CRZ clearance',
+      src: '/images/night-aerial.jpg',
+      alt: 'Aerial view of a residential site set within green land, the kind of setting that requires environmental clearance',
     },
   },
   {
@@ -75,13 +75,13 @@ export default function PracticeTabs() {
   const current = PRACTICES[active];
 
   return (
-    <section id="practice" className="relative bg-paper/40 py-20 md:py-28">
+    <section id="practice" className="relative bg-paper/40 py-14 md:py-20">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
         {/* No section heading: the standfirst carries the lead on its own, so
             it moves to the left where the title used to sit rather than
             staying pinned right against nothing. */}
-        <div className="mb-10 md:mb-14">
-          <p className="max-w-[44ch] text-muted text-[15px] md:text-base leading-relaxed">
+        <div className="mb-8 md:mb-10">
+          <p className="max-w-[44ch] text-muted text-[17px] md:text-[19px] leading-relaxed">
             Three strands of the practice, one continuous process — click through each.
           </p>
         </div>
@@ -90,15 +90,21 @@ export default function PracticeTabs() {
             section used to run tabs + copy only, which left the right half and
             the lower third of the band empty on the section that explains what
             the studio actually does. */}
-        <div className="grid md:grid-cols-[200px_minmax(0,1fr)_minmax(0,0.9fr)] gap-10 md:gap-14 items-center">
-          {/* tab list */}
-          <div className="flex md:flex-col gap-3 md:gap-2">
+        <div className="grid md:grid-cols-[248px_minmax(0,1fr)_minmax(0,0.9fr)] gap-10 md:gap-14 items-center">
+          {/* Tab list. Enlarged from 12px in 200x42 boxes: the contrast was
+              already fine at 5.4:1, so the problem was scale rather than
+              colour — these are the section's only controls and were reading
+              as captions. The inactive border is also lifted off `line`, which
+              is a hairline token and too faint to describe a control. */}
+          <div className="grid grid-cols-3 gap-2 md:flex md:flex-col md:gap-2.5 min-w-0">
             {PRACTICES.map((p, i) => (
               <button
                 key={p.idx}
                 onClick={() => setActive(i)}
-                className={`text-left font-mono text-xs tracking-widest uppercase py-3 px-4 border transition-colors ${
-                  active === i ? 'border-ink bg-ink text-paper' : 'border-line text-muted hover:border-ink'
+                className={`text-left font-mono text-[11px] tracking-[0.1em] py-3 px-3 md:text-[13.5px] md:tracking-[0.14em] md:py-4 md:px-5 uppercase border transition-colors ${
+                  active === i
+                    ? 'border-ink bg-ink text-paper'
+                    : 'border-ink/30 text-muted hover:border-ink hover:text-ink'
                 }`}
               >
                 {p.idx} / {p.label}
@@ -107,7 +113,7 @@ export default function PracticeTabs() {
           </div>
 
           {/* active panel */}
-          <div key={active} className="animate-[fadein_0.5s_ease]">
+          <div key={active} className="min-w-0 animate-[fadein_0.5s_ease]">
             {current.icon}
             {/* h2, not h3: with the section heading gone this is the section's
                 top-level heading, and an h3 here would skip a level under the
@@ -137,18 +143,6 @@ export default function PracticeTabs() {
               className="object-cover"
             />
           </div>
-        </div>
-
-        {/* progress dots */}
-        <div className="flex gap-2 mt-12">
-          {PRACTICES.map((_, i) => (
-            <span
-              key={i}
-              className={`h-1 rounded-full transition-all duration-300 ${
-                active === i ? 'w-8 bg-accent' : 'w-3 bg-line'
-              }`}
-            />
-          ))}
         </div>
       </div>
     </section>

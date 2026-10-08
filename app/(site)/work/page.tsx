@@ -46,12 +46,12 @@ export default async function WorkPage() {
 
       {/* The grid sets its own width so the tiles run to the window edge; only
           the filter row is held to the text column. */}
-      <section className="bg-paper/40 pt-9 md:pt-12 pb-24 md:pb-[120px]">
+      <section className="bg-paper/40 pt-9 md:pt-12 pb-14 md:pb-20">
         <WorkGrid projects={projects} />
 
         {/* The page shows six projects against a claim of sixty-plus. Rather
             than leave that gap unaddressed, it becomes the invitation. */}
-        <div className="max-w-[1240px] mx-auto px-6 md:px-10 mt-16 md:mt-20">
+        <div className="max-w-[1240px] mx-auto px-6 md:px-10 mt-12 md:mt-14">
           <div className="border-t border-line pt-10 flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-5">
             <p className="font-display text-xl md:text-2xl font-medium max-w-[26ch] leading-snug">
               And many more.

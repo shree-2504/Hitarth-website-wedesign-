@@ -32,18 +32,24 @@ export const SITE = {
   phoneHref: '+919324270864',
   email: 'we.designarc@gmail.com',
   address: {
-    locality: 'Borivali (W)',
+    street: '502, TGN Square, Next to Kalamandir Jewellers, Chandavarkar Road',
+    locality: 'Borivali (West)',
     region: 'Maharashtra',
     city: 'Mumbai',
+    postalCode: '400092',
     country: 'IN',
-    full: 'Borivali (W), Mumbai, Maharashtra',
+    full: '502, TGN Square, Next to Kalamandir Jewellers, Chandavarkar Road, Borivali (West), Mumbai 400092',
   },
   geo: { lat: 19.2295, lng: 72.848 },
   foundingYear: 2010,
   areaServed: 'Mumbai Metropolitan Region, Maharashtra',
 } as const;
 
-export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${SITE.geo.lat},${SITE.geo.lng}`;
+// Searched by name and street rather than by coordinates, so the pin lands on
+// the building itself instead of a rough point in Borivali.
+export const MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+  'TGN Square, Chandavarkar Road, Borivali West, Mumbai 400092',
+)}`;
 
 /**
  * The site's navigation, read by both the header and the footer.
@@ -81,7 +87,8 @@ export function localBusinessJsonLd() {
       addressLocality: SITE.address.city,
       addressRegion: SITE.address.region,
       addressCountry: SITE.address.country,
-      streetAddress: SITE.address.locality,
+      streetAddress: `${SITE.address.street}, ${SITE.address.locality}`,
+      postalCode: SITE.address.postalCode,
     },
     geo: {
       '@type': 'GeoCoordinates',

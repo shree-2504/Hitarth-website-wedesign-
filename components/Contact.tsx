@@ -4,7 +4,7 @@ import { SITE, MAPS_URL } from '@/lib/site';
 
 export default function Contact() {
   return (
-    <section id="contact" className="bg-ink text-paper py-28 md:py-[130px] text-center relative">
+    <section id="contact" className="bg-ink text-paper py-16 md:py-20 text-center relative">
       <div className="max-w-[720px] mx-auto px-6 md:px-10 relative">
         <div
           className="eyebrow reveal justify-center mb-5"
@@ -25,7 +25,7 @@ export default function Contact() {
           From first sketch to CRZ sign-off — tell us about your site and we&apos;ll take it from
           there.
         </p>
-        <div className="reveal mt-11 flex gap-6 justify-center flex-wrap">
+        <div className="reveal mt-9 flex gap-6 justify-center flex-wrap">
           <EmailStudioModal />
           <MagneticLink
             href={`tel:${SITE.phoneHref}`}
@@ -38,9 +38,12 @@ export default function Contact() {
           href={MAPS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="reveal mt-9 inline-block font-mono text-[13px] tracking-wide uppercase text-[#AFAEAC] border-b border-transparent hover:border-paper hover:text-paper transition-colors"
+          className="reveal mt-9 inline-block font-mono text-[13px] leading-[1.7] tracking-wide uppercase text-[#AFAEAC] hover:text-paper transition-colors"
         >
-          {SITE.address.full} ↗
+          <span className="block">{SITE.address.street},</span>
+          <span className="block">
+            {SITE.address.locality}, {SITE.address.city} {SITE.address.postalCode} ↗
+          </span>
         </a>
       </div>
     </section>

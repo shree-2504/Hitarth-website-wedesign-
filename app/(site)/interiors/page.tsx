@@ -31,7 +31,7 @@ const FEATURES = [
 export default function InteriorsPage() {
   return (
     <>
-      <section className="bg-paper/40 pt-[140px] md:pt-[168px] pb-24 md:pb-[120px]">
+      <section className="bg-paper/40 pt-[140px] md:pt-[168px] pb-14 md:pb-20">
         <div className="max-w-[1240px] mx-auto px-6 md:px-10">
           {/* Text and image side by side: the page previously opened on ~700px
               of copy before showing a single room, on a page selling rooms. */}
@@ -63,7 +63,7 @@ export default function InteriorsPage() {
             </div>
           </div>
 
-          <h2 className="reveal font-display font-medium text-2xl md:text-[28px] mt-20 md:mt-28 mb-8 md:mb-10">
+          <h2 className="reveal font-display font-medium text-2xl md:text-[28px] mt-14 md:mt-20 mb-8 md:mb-10">
             What that covers
           </h2>
 
@@ -76,7 +76,7 @@ export default function InteriorsPage() {
             ))}
           </div>
 
-          <div className="eyebrow reveal mt-16 md:mt-20 mb-8 md:mb-10">Featured interior projects</div>
+          <div className="eyebrow reveal mt-12 md:mt-14 mb-8 md:mb-10">Featured interior projects</div>
 
           <InteriorGallery projects={interiorProjects} />
         </div>
