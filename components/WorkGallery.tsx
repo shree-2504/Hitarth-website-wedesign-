@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Navigation, Keyboard, A11y, Autoplay, Mousewheel } from 'swiper/modules';
+import { EffectCoverflow, Keyboard, A11y, Autoplay, Mousewheel } from 'swiper/modules';
 import type { Swiper as SwiperInstance } from 'swiper';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,7 +11,6 @@ import type { Project } from '@/data/projects';
 
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
-import 'swiper/css/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -24,8 +23,6 @@ export default function WorkGallery({
 }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperInstance | null>(null);
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
 
   // Scoped to this mount (not the page-wide ScrollReveals singleton) so
   // switching filters — which remounts this component — always re-reveals
@@ -95,7 +92,7 @@ export default function WorkGallery({
       className="relative"
     >
       <Swiper
-        modules={[EffectCoverflow, Navigation, Keyboard, A11y, Autoplay, Mousewheel]}
+        modules={[EffectCoverflow, Keyboard, A11y, Autoplay, Mousewheel]}
         effect="coverflow"
         grabCursor
         centeredSlides
@@ -104,14 +101,6 @@ export default function WorkGallery({
         keyboard={{ enabled: true }}
         mousewheel={{ forceToAxis: true, sensitivity: 1, releaseOnEdges: true }}
         slidesPerView="auto"
-        navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
-        onBeforeInit={(s) => {
-          const nav = s.params.navigation;
-          if (nav && typeof nav === 'object') {
-            nav.prevEl = prevRef.current;
-            nav.nextEl = nextRef.current;
-          }
-        }}
         autoplay={{ delay: 4500, disableOnInteraction: false }}
         onSwiper={(s) => {
           swiperRef.current = s;
@@ -169,9 +158,12 @@ export default function WorkGallery({
         ))}
       </Swiper>
 
+      {/* Driven straight off the instance rather than through Swiper's
+          Navigation module: that module binds to the buttons at init, when
+          these refs were still null, so the arrows rendered but did nothing. */}
       <button
-        ref={prevRef}
         type="button"
+        onClick={() => swiperRef.current?.slidePrev()}
         aria-label="Previous project"
         className="hidden md:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center border border-ink/40 bg-paper/70 backdrop-blur-sm hover:border-ink hover:bg-ink hover:text-paper transition-colors disabled:opacity-30"
       >
@@ -180,8 +172,8 @@ export default function WorkGallery({
         </svg>
       </button>
       <button
-        ref={nextRef}
         type="button"
+        onClick={() => swiperRef.current?.slideNext()}
         aria-label="Next project"
         className="hidden md:flex absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-10 w-11 h-11 items-center justify-center border border-ink/40 bg-paper/70 backdrop-blur-sm hover:border-ink hover:bg-ink hover:text-paper transition-colors disabled:opacity-30"
       >

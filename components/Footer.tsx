@@ -20,10 +20,10 @@ export default function Footer() {
     <footer className="bg-paper/40 pt-10 pb-8">
       <div className="max-w-[1240px] mx-auto px-6 md:px-10 border-t border-line pt-9">
         <div className="grid gap-10 md:grid-cols-[auto_1fr_auto] md:gap-16">
-          <a href="/#top" className="flex flex-col items-center leading-none select-none self-start">
-            {/* Kept a step below the header's 30px so the mark still reads as
-                a sign-off rather than competing with the one at the top. */}
-            <span className="font-display font-extrabold text-[25px] tracking-tight">
+          <a href="/#top" className="flex flex-col items-center w-fit leading-none select-none self-start">
+            {/* Larger than the header's 30px: down here the mark has the
+                space to itself and closes the page as the studio's signature. */}
+            <span className="font-display font-extrabold text-[36px] tracking-tight">
               <span style={{ color: '#E31E24' }}>W</span>
               <span style={{ color: '#58595B' }}>e</span>{' '}
               <span style={{ color: '#E31E24' }}>D</span>
@@ -32,7 +32,7 @@ export default function Footer() {
                 <span className="relative inline-block leading-none">
                   <span
                     aria-hidden="true"
-                    className="absolute left-1/2 -translate-x-1/2 top-[1px] w-[5px] h-[5px]"
+                    className="absolute left-1/2 -translate-x-1/2 top-[1px] w-[7px] h-[7px]"
                     style={{ backgroundColor: '#E31E24' }}
                   />
                   ı
@@ -40,8 +40,8 @@ export default function Footer() {
                 gn
               </span>
             </span>
-            <span className="w-full h-[2px] bg-[#58595B] mt-[3px]" />
-            <span className="mt-[3px] font-sans text-[10px] tracking-wide" style={{ color: '#58595B' }}>
+            <span className="w-full h-[3px] bg-[#58595B] mt-[4px]" />
+            <span className="mt-[5px] font-sans text-[14px] tracking-wide" style={{ color: '#58595B' }}>
               {SITE.tagline}
             </span>
           </a>
