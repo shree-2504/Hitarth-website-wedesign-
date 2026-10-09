@@ -58,30 +58,72 @@ export default function WorkGallery({
   };
   const stopAutoplay = () => swiperRef.current?.autoplay?.stop();
 
-  // Swiper's centered loop mode needs at least slidesPerView + slidesPerGroup + 1
-  // real slides to compute the wrap correctly — a category with only 2-3 projects
-  // (e.g. Institutional) falls short and leaves a blank gap at the loop boundary.
-  // Padding out to a minimum count gives it enough real slides to loop against.
-  //
-  // Round that padding up to a whole multiple of the project count. Padding to a
-  // flat 8 meant 7 projects became [p0…p6, p0] — the first project repeated
-  // right next to itself across the loop seam, so two copies of the same tower
-  // sat in one viewport and the portfolio read as thinner than it is. A whole
-  // multiple repeats every project the same number of times and spaces the
-  // copies a full cycle apart, which pushes them off past the visible row.
-  //
-  // Dropping the loop entirely for short categories was tried and is worse:
-  // centeredSlides then parks slide 0 in the middle and leaves the whole left
-  // half of the row empty.
+  // The coverflow carousel only reads as a carousel when there are enough
+  // projects to fill the row. Below that, Swiper's centred loop has to be fed
+  // copies to wrap against — which put the two Institutional buildings on
+  // screen four times each — and switching the loop off instead parks slide 0
+  // in the middle with the left half of the row empty. So small sets are laid
+  // out once, side by side, and only full sets get the carousel.
+  const CAROUSEL_MIN = 6;
+
+  const card = (p: Project, sizes: string, inCarousel: boolean) => (
+    <>
+      <button
+        type="button"
+        onClick={() => onSelect(p)}
+        aria-label={`View details for ${p.title}`}
+        data-cursor-label="View"
+        className="reveal-clip group relative block w-full aspect-[4/5] bg-[#2D2D2D] overflow-hidden text-left"
+      >
+        <Image
+          src={p.imageUrl}
+          alt=""
+          fill
+          sizes={sizes}
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-x-0 bottom-0 p-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
+          <span className="font-mono text-[11px] text-paper uppercase tracking-widest inline-flex items-center gap-1.5">
+            View project <span aria-hidden="true">→</span>
+          </span>
+        </div>
+      </button>
+      {/* h3, not h4: this sits under the section's h2 ("Selected work"), so
+          an h4 skips a level in the outline. In the carousel, captions ride
+          each slide's 3D transform and collided on the tilted side slides, so
+          `slide-caption` shows only the centred one's. */}
+      <div className={`${inCarousel ? 'slide-caption ' : ''}flex justify-between items-baseline mt-4 gap-4`}>
+        <h3 className="font-display font-medium text-[17px]">{p.title}</h3>
+        <span className="font-mono text-[11px] text-muted uppercase tracking-wide whitespace-nowrap">
+          {p.location}
+        </span>
+      </div>
+    </>
+  );
+
+  // Even a full set is short of what Swiper's centred loop needs to wrap
+  // cleanly, so it is repeated a whole number of times. A whole multiple
+  // spaces each project's copies a full cycle apart, off the visible row.
   const MIN_LOOP_SLIDES = 8;
-  const loopEnabled = projects.length > 1;
-  const slides =
-    loopEnabled && projects.length < MIN_LOOP_SLIDES
-      ? Array.from(
-          { length: Math.ceil(MIN_LOOP_SLIDES / projects.length) * projects.length },
-          (_, i) => projects[i % projects.length]
-        )
-      : projects;
+  const slides = Array.from(
+    { length: Math.ceil(MIN_LOOP_SLIDES / Math.max(projects.length, 1)) * projects.length },
+    (_, i) => projects[i % projects.length]
+  );
+
+  if (projects.length < CAROUSEL_MIN) {
+    return (
+      <div ref={rootRef} className="max-w-[1240px] mx-auto px-6 md:px-10">
+        <div className="flex flex-wrap lg:flex-nowrap justify-center gap-6 md:gap-8">
+          {projects.map((p) => (
+            <div key={p.id} className="w-full sm:w-[calc(50%-12px)] lg:w-auto lg:flex-1 lg:max-w-[340px]">
+              {card(p, '(min-width: 1024px) 340px, (min-width: 640px) 50vw, 100vw', false)}
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div
@@ -96,7 +138,7 @@ export default function WorkGallery({
         effect="coverflow"
         grabCursor
         centeredSlides
-        loop={loopEnabled}
+        loop
         speed={650}
         keyboard={{ enabled: true }}
         mousewheel={{ forceToAxis: true, sensitivity: 1, releaseOnEdges: true }}
@@ -120,40 +162,7 @@ export default function WorkGallery({
       >
         {slides.map((p, i) => (
           <SwiperSlide key={`${p.id}-${i}`} style={{ width: '340px', maxWidth: '78vw' }}>
-            <div className="slide-inner">
-              <button
-                type="button"
-                onClick={() => onSelect(p)}
-                aria-label={`View details for ${p.title}`}
-                data-cursor-label="View"
-                className="reveal-clip group relative block w-full aspect-[4/5] bg-[#2D2D2D] overflow-hidden text-left"
-              >
-                <Image
-                  src={p.imageUrl}
-                  alt=""
-                  fill
-                  sizes="340px"
-                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-x-0 bottom-0 p-5 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-out">
-                  <span className="font-mono text-[11px] text-paper uppercase tracking-widest inline-flex items-center gap-1.5">
-                    View project <span aria-hidden="true">→</span>
-                  </span>
-                </div>
-              </button>
-              {/* Captions ride the slide's 3D transform, so on the tilted side
-                  slides they landed at different heights and overlapped their
-                  neighbours. Only the centred slide shows one. */}
-              <div className="slide-caption flex justify-between items-baseline mt-4 gap-4">
-                {/* h3, not h4: this sits under the section's h2 ("Selected
-                    work"), so an h4 skips a level in the outline. */}
-                <h3 className="font-display font-medium text-[17px]">{p.title}</h3>
-                <span className="font-mono text-[11px] text-muted uppercase tracking-wide whitespace-nowrap">
-                  {p.location}
-                </span>
-              </div>
-            </div>
+            <div className="slide-inner">{card(p, '340px', true)}</div>
           </SwiperSlide>
         ))}
       </Swiper>
