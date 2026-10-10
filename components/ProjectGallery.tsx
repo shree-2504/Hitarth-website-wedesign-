@@ -40,11 +40,17 @@ export default function ProjectGallery({ images, title }: { images: string[]; ti
     <div className="reveal mt-16 pt-9 border-t border-line">
       <span className="font-mono text-[11px] tracking-widest uppercase text-muted">More views</span>
       {/* Column count follows the set so a short one never strands an image
-          or leaves a row two-thirds empty: two views share the width, four
+          or leaves a row two-thirds empty: one sits at a modest size, two share the width, four
           run as a single row, anything else falls into threes. */}
       <div
-        className={`grid sm:grid-cols-2 gap-4 mt-6 ${
-          images.length === 2 ? '' : images.length === 4 ? 'md:grid-cols-4' : 'md:grid-cols-3'
+        className={`grid gap-4 mt-6 ${
+          images.length === 1
+            ? 'max-w-[420px]'
+            : images.length === 2
+              ? 'sm:grid-cols-2'
+              : images.length === 4
+                ? 'sm:grid-cols-2 md:grid-cols-4'
+                : 'sm:grid-cols-2 md:grid-cols-3'
         }`}
       >
         {images.map((src, i) => (

@@ -9,6 +9,10 @@ export type Project = {
   // project page's full-width header), as a CSS object-position. Defaults to
   // the centre; set it when something worth keeping sits near an edge.
   imagePosition?: string;
+  // 'contain' shows the whole cover inside the wide header, over a blurred
+  // copy of itself, instead of cropping it to fill. For covers too small or
+  // too square to survive being stretched across the full width.
+  imageFit?: 'cover' | 'contain';
   // Additional angles shown in a gallery on the project's detail page.
   // Does not include imageUrl itself.
   images?: string[];
@@ -133,6 +137,10 @@ export const fallbackProjects: Project[] = [
     location: 'Institutional',
     category: 'others',
     imageUrl: '/images/work/aadarsh-education-society-1.jpg',
+    // Only a 640px square exists; cropped to the full-width header it was
+    // magnified threefold and cut to a slice of the facade.
+    imageFit: 'contain',
+    images: ['/images/work/aadarsh-education-society-1.jpg'],
     description:
       'An institutional education building with a clean, high-rise elevation designed to anchor its street corner.',
   },

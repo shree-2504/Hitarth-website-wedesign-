@@ -66,16 +66,46 @@ export default async function ProjectPage({ params }: { params: { slug: string }
 
   return (
     <>
-      <div className="relative h-[70vh] min-h-[420px] mt-[76px]">
-        <Image
-          src={project.imageUrl}
-          alt={project.title}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: project.imagePosition ?? 'center' }}
-        />
+      <div className="relative h-[70vh] min-h-[420px] mt-[76px] overflow-hidden bg-ink">
+        {project.imageFit === 'contain' ? (
+          <>
+            {/* Backdrop: the same image, blurred and dimmed, so the band
+                still reads as a full-width header around the whole picture. */}
+            <Image
+              src={project.imageUrl}
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="50vw"
+              className="object-cover scale-110 blur-2xl opacity-60"
+            />
+            {/* A wide frame rather than the whole square: fitting the full
+                image left the building small in the band, while filling the
+                band magnified it threefold. This trims only sky and road. */}
+            <div className="absolute inset-y-5 md:inset-y-7 left-1/2 -translate-x-1/2 w-[min(820px,94%)]">
+              <Image
+                src={project.imageUrl}
+                alt={project.title}
+                fill
+                priority
+                sizes="(min-width: 872px) 820px, 94vw"
+                // On phones the frame is tall, so the whole square fits.
+                className="object-contain md:object-cover"
+                style={{ objectPosition: project.imagePosition ?? 'center 62%' }}
+              />
+            </div>
+          </>
+        ) : (
+          <Image
+            src={project.imageUrl}
+            alt={project.title}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: project.imagePosition ?? 'center' }}
+          />
+        )}
       </div>
 
       <section className="bg-paper/40 py-14 md:py-20">
