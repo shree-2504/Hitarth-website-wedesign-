@@ -27,8 +27,8 @@ export default function Work({ projects }: { projects: Project[] }) {
           </h2>
           <div className="reveal flex flex-col items-start md:items-end gap-4">
             <p className="max-w-[34ch] text-muted text-[17px] md:text-[18px] leading-relaxed">
-              60+ residential, commercial and industrial projects — a sample of what&apos;s on
-              the drawing board and what&apos;s built.
+              60+ residential, commercial, industrial layout and township layout projects — a
+              sample of what&apos;s on the drawing board and what&apos;s built.
             </p>
             <Link
               href="/work"

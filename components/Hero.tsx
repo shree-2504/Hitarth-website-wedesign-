@@ -32,9 +32,25 @@ export default function Hero() {
       v.pause();
       return;
     }
+    // Slowed so the build-up reads as a measured process rather than a
+    // time-lapse rush: the 10s clip plays over 20s. Reapplied whenever the
+    // media (re)loads or starts, since loading a source resets playbackRate
+    // and autoPlay can start the film before this effect has run.
+    const rate = 10 / 20;
+    const slow = () => {
+      v.defaultPlaybackRate = rate;
+      v.playbackRate = rate;
+    };
+    slow();
+    v.addEventListener('loadedmetadata', slow);
+    v.addEventListener('play', slow);
     v.play().catch(() => {
       /* Autoplay refused (e.g. power-saving mode): the poster stays up. */
     });
+    return () => {
+      v.removeEventListener('loadedmetadata', slow);
+      v.removeEventListener('play', slow);
+    };
   }, []);
 
   // Plate entrance: the outline draws in, then the copy rises line by line.
@@ -82,9 +98,9 @@ export default function Hero() {
         <video
           ref={videoRef}
           className="absolute inset-0 w-full h-full object-cover"
-          // Kept mostly in colour: the sky and the green around the plot are
-          // what make the film read as a real place rather than a render.
-          style={{ filter: 'saturate(0.8) brightness(0.82) contrast(1.06)' }}
+          // Kept in colour so it reads as a real place, but held well down so
+          // the statement on top is what the eye lands on first.
+          style={{ filter: 'saturate(0.75) brightness(0.55) contrast(1.05)' }}
           src="/videos/hero.mp4"
           poster="/images/hero-poster.jpg"
           autoPlay
@@ -117,7 +133,7 @@ export default function Hero() {
       <div className="relative z-[2] h-full flex flex-col items-center justify-center px-6 md:px-10 py-24 text-[#FFFFFF]">
         <div
           ref={plateRef}
-          className="relative w-full max-w-[960px] text-center border border-[#FFFFFF]/30 bg-[#0B0F11]/45 backdrop-blur-[8px] px-6 py-9 sm:px-14 sm:py-14 md:px-20 md:py-16"
+          className="relative w-full max-w-[960px] text-center border border-[#FFFFFF]/30 bg-[#0B0F11]/55 backdrop-blur-[8px] px-6 py-9 sm:px-14 sm:py-14 md:px-20 md:py-16"
         >
           {CORNERS.map((c) => (
             <span key={c} aria-hidden="true" className={`absolute ${c} w-4 h-4`}>
@@ -133,15 +149,16 @@ export default function Hero() {
           </p>
 
           <h1 data-rise className="font-display font-medium leading-[1.2] text-[clamp(22px,2.6vw,36px)] text-balance">
-            WE DESIGN, a Mumbai-based architectural studio working across design, planning, and
+            <span className="text-[#E31E24]">W</span>E <span className="text-[#E31E24]">D</span>ESIGN, a Mumbai-based architectural studio working across design, planning, and
             regulatory processes.
           </h1>
 
           <div className="mt-6 md:mt-8 space-y-4 md:space-y-5 text-[15px] md:text-[18px] leading-relaxed text-[#FFFFFF]/90 text-balance sm:[text-wrap:wrap] sm:text-justify sm:[text-align-last:center]">
             <p data-rise>
-              We specialize in CRZ and wetland approvals, helping navigate complex development
-              requirements with clarity and expertise. Alongside this, our design practice works
-              across residential, commercial, industrial, and large-scale layout projects.
+              Turning an architectural vision into reality requires more than just great design —
+              it demands seamless regulatory approval. As specialists in architectural design
+              permissions and Coastal Regulation Zone (CRZ) clearance, we bridge the gap between
+              ambitious design and complex statutory compliance.
             </p>
             <p data-rise>
               We believe good architecture comes from understanding its context, constraints, and

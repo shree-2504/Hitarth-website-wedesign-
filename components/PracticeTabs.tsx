@@ -46,8 +46,8 @@ const PRACTICES: Practice[] = [
       </svg>
     ),
     image: {
-      src: '/images/night-aerial.jpg',
-      alt: 'Aerial view of a residential site set within green land, the kind of setting that requires environmental clearance',
+      src: '/images/approvals-riverfront.jpg',
+      alt: 'Aerial masterplan of a green riverfront corridor running through a city, the kind of sensitive edge that requires CRZ and environmental clearance',
     },
   },
   {

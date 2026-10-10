@@ -93,10 +93,10 @@ export default function Header() {
           </span>
         </a>
 
-        {/* Boxed nav. The resting border is faint so the row still reads as
-            navigation rather than five buttons competing with the CTA; hover
-            and the current page fill it outright, which is the same language
-            the practice tabs and work filters already use. */}
+        {/* Boxed nav. Over the hero film each box gets a dark fill and a
+            near-white edge so it holds against a moving picture. Hover and the
+            current page fill it outright, the same language the practice tabs
+            and work filters already use. */}
         <nav className="hidden md:flex gap-1.5 lg:gap-2">
           {LINKS.map((l) => {
             const current = l.href === pathname;
@@ -105,14 +105,14 @@ export default function Header() {
                 key={l.href}
                 href={l.href}
                 aria-current={current ? 'page' : undefined}
-                className={`text-[12px] tracking-wide uppercase font-mono px-3.5 lg:px-4 py-2 border transition-colors duration-300 ${
+                className={`text-[13px] font-medium tracking-wide uppercase font-mono px-4 lg:px-5 py-2.5 border transition-colors duration-300 ${
                   overHero
                     ? current
                       ? 'bg-[#FFFFFF] text-ink border-[#FFFFFF]'
-                      : 'border-[#FFFFFF]/30 hover:border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-ink'
+                      : 'bg-ink/45 backdrop-blur-sm border-[#FFFFFF]/75 hover:border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-ink'
                     : current
                       ? 'bg-ink text-paper border-ink'
-                      : 'border-ink/25 hover:border-ink hover:bg-ink hover:text-paper'
+                      : 'border-ink/50 hover:border-ink hover:bg-ink hover:text-paper'
                 }`}
               >
                 {l.label}
@@ -123,9 +123,9 @@ export default function Header() {
 
         <MagneticLink
           href="/#contact"
-          className={`hidden md:inline-flex border px-5 py-2.5 text-xs font-mono tracking-wide uppercase transition-colors ${
+          className={`hidden md:inline-flex border px-5 py-2.5 text-[13px] font-medium font-mono tracking-wide uppercase transition-colors ${
             overHero
-              ? 'border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-ink'
+              ? 'bg-ink/45 backdrop-blur-sm border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-ink'
               : 'border-ink hover:bg-ink hover:text-paper'
           }`}
         >

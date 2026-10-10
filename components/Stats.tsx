@@ -13,7 +13,7 @@ const STATS = [
   {
     cap: 'Practising since',
     num: '15+',
-    lbl: 'Years of expertise in planning & design',
+    lbl: 'Years of expertise in planning, design & approvals',
     icon: (
       <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-current fill-none" strokeWidth={1.3}>
         <circle cx="12" cy="12" r="8.5" />
@@ -22,7 +22,7 @@ const STATS = [
     ),
   },
   {
-    cap: 'CRZ cleared',
+    cap: 'CRZ clearance',
     num: '1000+',
     lbl: 'Acres of CRZ approvals secured',
     icon: (
@@ -33,9 +33,9 @@ const STATS = [
     ),
   },
   {
-    cap: 'Delivered',
+    cap: 'Projects',
     num: '60+',
-    lbl: 'Residential, commercial & industrial projects completed',
+    lbl: 'Township layouts, industrial layouts, residential, commercial, schools, hospitals & institutional',
     icon: (
       <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-current fill-none" strokeWidth={1.3}>
         <rect x="3.5" y="3.5" width="17" height="17" />
@@ -46,7 +46,7 @@ const STATS = [
   {
     cap: 'Team',
     num: 'In-house',
-    lbl: 'Experienced team of architects & planners',
+    lbl: 'Experienced team of architects, planners & environmental coordinators',
     icon: (
       <svg viewBox="0 0 24 24" className="w-4 h-4 stroke-current fill-none" strokeWidth={1.3}>
         <circle cx="9" cy="9" r="3.2" />
