@@ -29,8 +29,8 @@ const PRACTICES: Practice[] = [
       </svg>
     ),
     image: {
-      src: '/images/coastal-towers.jpg',
-      alt: 'Seasons, a multi-tower residential masterplan, aerial view',
+      src: '/images/portfolio-towers-dusk.jpg',
+      alt: 'Residential towers at dusk, lit from within, seen from the approach road',
     },
   },
   {
