@@ -5,6 +5,10 @@ export type Project = {
   location: string;
   category: string;
   imageUrl: string;
+  // Focal point for the cover where it is cropped into a wide frame (the
+  // project page's full-width header), as a CSS object-position. Defaults to
+  // the centre; set it when something worth keeping sits near an edge.
+  imagePosition?: string;
   // Additional angles shown in a gallery on the project's detail page.
   // Does not include imageUrl itself.
   images?: string[];
@@ -18,6 +22,15 @@ export type Project = {
   status?: string;
   scope?: string;
 };
+
+/**
+ * The type to print on a project. `category` drives the filters, and the
+ * catch-all "others" group is only meaningful as a filter, so a project filed
+ * there is labelled by its own location tag instead ("Hospital").
+ */
+export function typeLabel(p: Pick<Project, 'category' | 'location'>) {
+  return p.category === 'others' ? p.location : p.category;
+}
 
 export const fallbackProjects: Project[] = [
   {
@@ -43,8 +56,14 @@ export const fallbackProjects: Project[] = [
     title: 'Seasons',
     location: 'Residential Masterplan',
     category: 'residential',
-    imageUrl: '/images/night-aerial.jpg',
-    images: ['/images/tower-cluster.jpg', '/images/coastal-towers.jpg', '/images/street-view.jpg'],
+    imageUrl: '/images/work/seasons-evening.jpg',
+    images: [
+      '/images/work/seasons-aerial.jpg',
+      '/images/coastal-towers.jpg',
+      '/images/street-view.jpg',
+      '/images/work/seasons-clubhouse.jpg',
+      '/images/tower-cluster.jpg',
+    ],
     description:
       'A multi-tower residential masterplan combining podium amenity decks, shared landscaped grounds and a mix of tower typologies phased across the site.',
   },
@@ -52,16 +71,18 @@ export const fallbackProjects: Project[] = [
     id: 'animal-hospital',
     slug: 'animal-hospital',
     title: 'Shrimad Rajchandra Animal Hospital',
-    location: 'Institutional',
-    category: 'institutional',
+    location: 'Hospital',
+    category: 'others',
     imageUrl: '/images/work/animal-hospital-1.jpg',
+    // The hospital's name runs along the parapet, which a centred crop cut off.
+    imagePosition: 'center 12%',
     images: [
       '/images/work/animal-hospital-2.jpg',
       '/images/work/animal-hospital-3.jpg',
       '/images/work/animal-hospital-4.jpg',
     ],
     description:
-      'An institutional animal hospital designed around clear circulation between public, clinical and service areas, with a street presence suited to daily public access.',
+      'An animal hospital designed around clear circulation between public, clinical and service areas, with a street presence suited to daily public access.',
   },
   {
     id: 'sk-heights',
@@ -110,7 +131,7 @@ export const fallbackProjects: Project[] = [
     slug: 'aadarsh-education-society',
     title: 'Aadarsh Education Society',
     location: 'Institutional',
-    category: 'institutional',
+    category: 'others',
     imageUrl: '/images/work/aadarsh-education-society-1.jpg',
     description:
       'An institutional education building with a clean, high-rise elevation designed to anchor its street corner.',

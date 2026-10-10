@@ -11,7 +11,10 @@ function formatCategory(cat: string) {
 }
 
 export default function Work({ projects }: { projects: Project[] }) {
-  const categories = ['all', ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))];
+  // In order of first appearance, except the catch-all "others", which always
+  // goes last whatever the running order of the projects.
+  const found = Array.from(new Set(projects.map((p) => p.category).filter(Boolean)));
+  const categories = ['all', ...found.filter((c) => c !== 'others'), ...found.filter((c) => c === 'others')];
   const [activeCategory, setActiveCategory] = useState('all');
   const [activeProject, setActiveProject] = useState<Project | null>(null);
 

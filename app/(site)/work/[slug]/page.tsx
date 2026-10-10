@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import Contact from '@/components/Contact';
 import ProjectGallery from '@/components/ProjectGallery';
 import { getProjects, getProjectBySlug } from '@/lib/sanity/queries';
+import { typeLabel } from '@/data/projects';
 
 export async function generateStaticParams() {
   const projects = await getProjects();
@@ -73,6 +74,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           priority
           sizes="100vw"
           className="object-cover"
+          style={{ objectPosition: project.imagePosition ?? 'center' }}
         />
       </div>
 
@@ -85,13 +87,13 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             ← All work
           </Link>
 
-          {project.category && (
-            <div className="eyebrow mt-8 mb-4">{project.category}</div>
+          {typeLabel(project) && (
+            <div className="eyebrow mt-8 mb-4">{typeLabel(project)}</div>
           )}
           <h1 className="font-display font-medium text-[clamp(30px,4vw,48px)] leading-tight">
             {project.title}
           </h1>
-          {project.location && (
+          {project.location && project.location !== typeLabel(project) && (
             <span className="block font-mono text-[11px] text-muted uppercase tracking-wide mt-3">
               {project.location}
             </span>

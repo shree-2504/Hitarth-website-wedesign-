@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import type { Project } from '@/data/projects';
+import { typeLabel, type Project } from '@/data/projects';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,7 +21,10 @@ function formatCategory(cat: string) {
 const FRAME = 'aspect-[4/3] sm:aspect-[4/5]';
 
 export default function WorkGrid({ projects }: { projects: Project[] }) {
-  const categories = ['all', ...Array.from(new Set(projects.map((p) => p.category).filter(Boolean)))];
+  // In order of first appearance, except the catch-all "others", which always
+  // goes last whatever the running order of the projects.
+  const found = Array.from(new Set(projects.map((p) => p.category).filter(Boolean)));
+  const categories = ['all', ...found.filter((c) => c !== 'others'), ...found.filter((c) => c === 'others')];
   const [activeCategory, setActiveCategory] = useState('all');
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -105,9 +108,9 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
               <div className="absolute inset-0 bg-gradient-to-b from-ink/75 via-ink/15 to-ink/70 transition-opacity duration-500 group-hover:from-ink/85 group-hover:to-ink/80" />
 
               {/* Category set vertically up the left edge, like a drawing margin. */}
-              {p.category && (
+              {typeLabel(p) && (
                 <span className="absolute left-4 bottom-5 font-mono text-[10px] tracking-[0.3em] uppercase text-paper/65 [writing-mode:vertical-rl] rotate-180">
-                  {formatCategory(p.category)}
+                  {formatCategory(typeLabel(p))}
                 </span>
               )}
 
@@ -117,7 +120,7 @@ export default function WorkGrid({ projects }: { projects: Project[] }) {
                 </h2>
                 {/* Several projects carry a location that merely repeats the
                     category; show it only where it adds something. */}
-                {p.location && p.location.toLowerCase() !== (p.category || '').toLowerCase() && (
+                {p.location && p.location.toLowerCase() !== (typeLabel(p) || '').toLowerCase() && (
                   <span className="block mt-1.5 font-mono text-[10.5px] tracking-widest uppercase text-paper/70">
                     {p.location}
                   </span>

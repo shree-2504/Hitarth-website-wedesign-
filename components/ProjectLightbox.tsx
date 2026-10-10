@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import type { Project } from '@/data/projects';
+import { typeLabel, type Project } from '@/data/projects';
 
 export default function ProjectLightbox({
   project,
@@ -53,8 +53,9 @@ export default function ProjectLightbox({
   const current = shots[activeImage] ?? shots[0];
 
   // e.g. category "residential" inside location tag "Residential Masterplan"
+  const type = typeLabel(project);
   const impliedByLocation = Boolean(
-    project.category && project.location?.toLowerCase().includes(project.category.toLowerCase())
+    type && project.location?.toLowerCase().includes(type.toLowerCase())
   );
 
   return (
@@ -88,9 +89,9 @@ export default function ProjectLightbox({
             {/* The category tag ("Residential") and the caption tag
                 ("Residential Masterplan") repeat each other when stacked, so
                 only show the category when it isn't already implied. */}
-            {project.category && !impliedByLocation && (
+            {type && !impliedByLocation && (
               <span className="font-mono text-[11px] text-muted uppercase tracking-wide">
-                {project.category}
+                {type}
               </span>
             )}
             <h3
