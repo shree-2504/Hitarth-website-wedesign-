@@ -39,7 +39,7 @@ export default async function WorkPage() {
               is brightest exactly where this line falls. */}
           <p className="mt-5 max-w-[46ch] text-paper/85 text-[14px] md:text-[15px] leading-relaxed">
             A selection from 60+ residential, commercial, industrial and institutional
-            projects — from first sketch to CRZ sign-off.
+            projects — from concept to concrete.
           </p>
         </div>
       </div>
