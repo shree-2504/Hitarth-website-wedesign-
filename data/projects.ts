@@ -85,7 +85,7 @@ export const fallbackProjects: Project[] = [
     location: 'Naigaon',
     category: 'commercial',
     imageUrl: '/images/work/7th-avenue-naigaon-1.jpg',
-    images: ['/images/work/7th-avenue-naigaon-2.jpg'],
+    images: ['/images/work/7th-avenue-naigaon-1.jpg', '/images/work/7th-avenue-naigaon-2.jpg'],
     description:
       'A sprawling commercial building with office spaces, a banquet hall and retail space.',
   },

@@ -20,17 +20,17 @@ export default async function WorkPage() {
           switches to paper across this — see DARK_HERO_ROUTES in Header. */}
       <div className="relative h-[46vh] min-h-[320px] md:h-[54vh] overflow-hidden bg-ink">
         <Image
-          src="/images/residential-tower-1.jpg"
-          alt="Gulmohar Homes residential tower by We Design Architects"
+          src="/images/work/niyara-residency-3.jpg"
+          alt="Niyara Residency at dusk, a multi-wing residential development by We Design Architects"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="object-cover object-[center_35%]"
         />
-        {/* Weighted to the top and centre: the header's paper nav sits in the
-            first 76px and the title lands mid-frame, both over a render that
-            is bright where the building catches light. */}
-        <div className="absolute inset-0 bg-gradient-to-b from-ink/85 via-ink/65 to-ink/75" />
+        {/* Lighter than a daylight render would need: this one is already a
+            dusk scene, so the shade only has to settle the header's nav and
+            the title, not knock back a bright sky. */}
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/40 to-ink/55" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
           <h1 className="font-display font-medium text-paper text-[clamp(30px,6vw,64px)] tracking-[0.2em] uppercase">
             Projects
