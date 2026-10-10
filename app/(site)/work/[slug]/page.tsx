@@ -79,10 +79,12 @@ export default async function ProjectPage({ params }: { params: { slug: string }
               sizes="50vw"
               className="object-cover scale-110 blur-2xl opacity-60"
             />
-            {/* A wide frame rather than the whole square: fitting the full
+            {/* A 4:3 frame rather than the whole square: fitting the full
                 image left the building small in the band, while filling the
-                band magnified it threefold. This trims only sky and road. */}
-            <div className="absolute inset-y-5 md:inset-y-7 left-1/2 -translate-x-1/2 w-[min(820px,94%)]">
+                band magnified it threefold. The fixed shape keeps the crop the
+                same on every window, so short screens don't lose the sign
+                along the top; it trims only sky and road. */}
+            <div className="absolute inset-y-5 md:inset-y-7 left-1/2 -translate-x-1/2 w-[94%] md:w-auto md:max-w-[94%] md:aspect-[4/3]">
               <Image
                 src={project.imageUrl}
                 alt={project.title}
@@ -91,7 +93,7 @@ export default async function ProjectPage({ params }: { params: { slug: string }
                 sizes="(min-width: 872px) 820px, 94vw"
                 // On phones the frame is tall, so the whole square fits.
                 className="object-contain md:object-cover"
-                style={{ objectPosition: project.imagePosition ?? 'center 62%' }}
+                style={{ objectPosition: project.imagePosition ?? 'center 58%' }}
               />
             </div>
           </>
