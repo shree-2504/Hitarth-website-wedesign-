@@ -91,7 +91,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <div id="top" ref={heroRef} className="relative h-[100svh] min-h-[680px] overflow-hidden bg-ink">
+    <div id="top" ref={heroRef} className="relative min-h-[100svh] overflow-hidden bg-ink">
       {/* Oversized by a few percent so the parallax shift never exposes an
           edge. Muted and playsInline are both required for autoplay on iOS. */}
       <div ref={filmRef} className="absolute -inset-[3%]">
@@ -130,10 +130,13 @@ export default function Hero() {
         Planning · Design · CRZ Approvals
       </span>
 
-      <div className="relative z-[2] h-full flex flex-col items-center justify-center px-6 md:px-10 py-24 text-[#FFFFFF]">
+      {/* At least a full screen, and taller when the plate needs it: on short
+          windows (a 1600x770 laptop) a fixed-height hero let the centred plate
+          ride up under the header. The top padding always clears the header. */}
+      <div className="relative z-[2] min-h-[100svh] flex flex-col items-center justify-center px-6 md:px-10 pt-28 pb-20 [@media(max-height:820px)]:pt-24 [@media(max-height:820px)]:pb-16 text-[#FFFFFF]">
         <div
           ref={plateRef}
-          className="relative w-full max-w-[960px] text-center border border-[#FFFFFF]/30 bg-[#0B0F11]/55 backdrop-blur-[8px] px-6 py-9 sm:px-14 sm:py-14 md:px-20 md:py-16"
+          className="relative w-full max-w-[960px] text-center border border-[#FFFFFF]/30 bg-[#0B0F11]/55 backdrop-blur-[8px] px-6 py-9 sm:px-14 sm:py-14 md:px-20 md:py-16 [@media(min-width:768px)_and_(max-height:820px)]:py-10"
         >
           {CORNERS.map((c) => (
             <span key={c} aria-hidden="true" className={`absolute ${c} w-4 h-4`}>
@@ -148,7 +151,7 @@ export default function Hero() {
             <span className="w-8 h-px bg-[#E31E24]" />
           </p>
 
-          <h1 data-rise className="font-display font-medium leading-[1.2] text-[clamp(22px,2.6vw,36px)] text-balance">
+          <h1 data-rise className="font-display font-medium leading-[1.2] text-[clamp(22px,min(2.6vw,4.2vh),36px)] text-balance">
             <span className="text-[#E31E24]">W</span>E <span className="text-[#E31E24]">D</span>ESIGN, a Mumbai-based architectural studio working across design, planning, and
             regulatory processes.
           </h1>

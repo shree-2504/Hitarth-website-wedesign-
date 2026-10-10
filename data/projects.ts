@@ -21,6 +21,23 @@ export type Project = {
 
 export const fallbackProjects: Project[] = [
   {
+    id: 'niyara-residency',
+    slug: 'niyara-residency',
+    title: 'Niyara Residency',
+    location: 'Residential Development',
+    category: 'residential',
+    imageUrl: '/images/work/niyara-residency-1.jpg',
+    images: [
+      '/images/work/niyara-residency-2.jpg',
+      '/images/work/niyara-residency-3.jpg',
+      '/images/work/niyara-residency-4.jpg',
+      '/images/work/niyara-residency-5.jpg',
+      '/images/work/niyara-residency-6.jpg',
+    ],
+    description:
+      'A multi-wing residential development whose stepped towers are framed by warm copper-toned fins, set over landscaped grounds with a dedicated clubhouse and rooftop terrace.',
+  },
+  {
     id: 'seasons',
     slug: 'seasons',
     title: 'Seasons',
@@ -32,19 +49,19 @@ export const fallbackProjects: Project[] = [
       'A multi-tower residential masterplan combining podium amenity decks, shared landscaped grounds and a mix of tower typologies phased across the site.',
   },
   {
-    id: 'gulmohar-homes',
-    slug: 'gulmohar-homes',
-    title: 'Gulmohar Homes',
-    location: 'Residential Tower',
-    category: 'residential',
-    imageUrl: '/images/residential-tower-1.jpg',
+    id: 'animal-hospital',
+    slug: 'animal-hospital',
+    title: 'Shrimad Rajchandra Animal Hospital',
+    location: 'Institutional',
+    category: 'institutional',
+    imageUrl: '/images/work/animal-hospital-1.jpg',
     images: [
-      '/images/work/gulmohar-homes-4.jpg',
-      '/images/work/gulmohar-homes-2.jpg',
-      '/images/work/gulmohar-homes-3.jpg',
+      '/images/work/animal-hospital-2.jpg',
+      '/images/work/animal-hospital-3.jpg',
+      '/images/work/animal-hospital-4.jpg',
     ],
     description:
-      'A stepped-crown residential tower with a retail-lined ground floor podium, designed to read cleanly at street level while stepping up into a distinctive high-rise silhouette.',
+      'An institutional animal hospital designed around clear circulation between public, clinical and service areas, with a street presence suited to daily public access.',
   },
   {
     id: 'sk-heights',
@@ -66,26 +83,27 @@ export const fallbackProjects: Project[] = [
     slug: '7th-avenue-naigaon',
     title: '7th Avenue',
     location: 'Naigaon',
-    category: 'residential',
+    category: 'commercial',
     imageUrl: '/images/work/7th-avenue-naigaon-1.jpg',
     images: ['/images/work/7th-avenue-naigaon-2.jpg'],
     description:
-      'A compact mixed-use residential building in Naigaon, with a ground-floor commercial frontage and a distinctive timber-slat crown marking the roofline.',
+      'A sprawling commercial building with office spaces, a banquet hall and retail space.',
   },
   {
-    id: 'animal-hospital',
-    slug: 'animal-hospital',
-    title: 'Shrimad Rajchandra Animal Hospital',
-    location: 'Institutional',
-    category: 'institutional',
-    imageUrl: '/images/work/animal-hospital-1.jpg',
+    id: 'gulmohar-homes',
+    slug: 'gulmohar-homes',
+    title: 'Gulmohar Homes',
+    location: 'Residential Tower',
+    category: 'residential',
+    imageUrl: '/images/work/gulmohar-homes-aerial.jpg',
     images: [
-      '/images/work/animal-hospital-2.jpg',
-      '/images/work/animal-hospital-3.jpg',
-      '/images/work/animal-hospital-4.jpg',
+      '/images/work/gulmohar-homes-aerial.jpg',
+      '/images/work/gulmohar-homes-3.jpg',
+      '/images/work/gulmohar-homes-plan.jpg',
+      '/images/work/gulmohar-homes-2.jpg',
     ],
     description:
-      'An institutional animal hospital designed around clear circulation between public, clinical and service areas, with a street presence suited to daily public access.',
+      'A stepped-crown residential tower with a retail-lined ground floor podium, designed to read cleanly at street level while stepping up into a distinctive high-rise silhouette.',
   },
   {
     id: 'aadarsh-education-society',

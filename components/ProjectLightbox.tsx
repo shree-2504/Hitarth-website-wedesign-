@@ -43,7 +43,10 @@ export default function ProjectLightbox({
 
   // The main image leads, then the project's other angles — the gallery was
   // already on the Project record but the modal only ever showed the cover.
-  const shots = [project.imageUrl, ...(project.images ?? [])].filter(Boolean);
+  // De-duplicated: a project may list its cover again among its views (so
+  // the project page's "More views" can show it), which would otherwise put
+  // the same image twice in this strip.
+  const shots = Array.from(new Set([project.imageUrl, ...(project.images ?? [])].filter(Boolean)));
 
   // The reset effect runs after this render, so on the first frame of a new
   // project activeImage can still point past the end of a shorter gallery.

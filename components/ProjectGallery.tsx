@@ -39,7 +39,13 @@ export default function ProjectGallery({ images, title }: { images: string[]; ti
   return (
     <div className="reveal mt-16 pt-9 border-t border-line">
       <span className="font-mono text-[11px] tracking-widest uppercase text-muted">More views</span>
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+      {/* Four views would leave one stranded on a second row of three, so
+          a set of four runs as a single row of four instead. */}
+      <div
+        className={`grid sm:grid-cols-2 gap-4 mt-6 ${
+          images.length === 4 ? 'md:grid-cols-4' : 'md:grid-cols-3'
+        }`}
+      >
         {images.map((src, i) => (
           <button
             key={src}
@@ -52,7 +58,7 @@ export default function ProjectGallery({ images, title }: { images: string[]; ti
               src={src}
               alt={`${title}, additional view ${i + 1}`}
               fill
-              sizes="(min-width: 768px) 33vw, 50vw"
+              sizes={images.length === 4 ? '(min-width: 768px) 25vw, 50vw' : '(min-width: 768px) 33vw, 50vw'}
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
             />
           </button>
