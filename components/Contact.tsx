@@ -22,7 +22,7 @@ export default function Contact() {
           </em>
         </h2>
         <p className="reveal mt-5 text-[#AFAEAC] text-base leading-relaxed">
-          From first sketch to CRZ sign-off — tell us about your site and we&apos;ll take it from
+          From concept to concrete — tell us about your site and we&apos;ll take it from
           there.
         </p>
         <div className="reveal mt-9 flex gap-6 justify-center flex-wrap">
