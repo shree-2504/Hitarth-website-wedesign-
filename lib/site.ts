@@ -31,6 +31,7 @@ export const SITE = {
   // E.164, for tel: links and structured data
   phoneHref: '+919324270864',
   email: 'we.designarc@gmail.com',
+  principal: 'Ar. Bindia Bhatt',
   address: {
     street: '502, TGN Square, Next to Kalamandir Jewellers, Chandavarkar Road',
     locality: 'Borivali (West)',
@@ -80,6 +81,7 @@ export function localBusinessJsonLd() {
     url: SITE_URL,
     telephone: SITE.phoneHref,
     email: SITE.email,
+    founder: { '@type': 'Person', name: SITE.principal.replace(/^Ar\.\s*/, ''), jobTitle: 'Architect' },
     image: `${SITE_URL}/images/hero-aerial.jpg`,
     foundingDate: String(SITE.foundingYear),
     address: {

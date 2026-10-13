@@ -58,6 +58,11 @@ export default function Footer() {
               with nothing to act on — phone and email are the two things a
               prospective client actually wants at the bottom of the page. */}
           <div className="flex flex-col gap-2 md:items-end md:text-right">
+            {/* The principal's name heads the contact details, in ink rather
+                than the red the links use, since it isn't one. */}
+            <span className="mb-1 font-mono text-[13px] font-semibold uppercase tracking-wide text-ink">
+              {SITE.principal}
+            </span>
             <a
               href={`tel:${SITE.phoneHref}`}
               className={contactClass}
